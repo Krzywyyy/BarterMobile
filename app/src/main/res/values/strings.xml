@@ -2,10 +2,16 @@
     <string name="app_name">Barter</string>
     <string name="login">Login</string>
     <string name="password">Hasło</string>
-    <string name="email">Email</string>
+    <string name="email">Email studencki</string>
     <string name="watman">Watman</string>
     <string name="logo_wat">Logo wat</string>
-    <string name="email_example">imie.nazwisko@student.wat.edu.pl</string>
+    <string name="email_example">Imie.nazwisko@student.wat.edu.pl</string>
     <string name="sign_in">Zaloguj się</string>
     <string name="missing_account">Zarejestruj się</string>
+    <string name="repassword">Ponów hasło</string>
+    <string name="sign_up">Zarejestruj się</string>
+    <string name="enter_password">Podaj hasło</string>
+    <string name="enter_password_again">Podaj hasło ponownie</string>
+    <string name="go_back">Wróć</string>
+    <string name="registration">Rejestracja</string>
 </resources>
