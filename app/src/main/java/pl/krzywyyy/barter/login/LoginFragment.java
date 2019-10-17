@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.Objects;
+
 import pl.krzywyyy.barter.R;
 
 public class LoginFragment extends Fragment {
@@ -47,7 +49,7 @@ public class LoginFragment extends Fragment {
 
     private void signUp() {
         try {
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.authentication_placeholder, new RegisterFragment());
             fragmentTransaction.commit();
         } catch(NullPointerException npe){

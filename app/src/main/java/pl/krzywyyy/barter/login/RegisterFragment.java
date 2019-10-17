@@ -20,7 +20,6 @@ public class RegisterFragment extends Fragment {
 
     public RegisterFragment() {}
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
