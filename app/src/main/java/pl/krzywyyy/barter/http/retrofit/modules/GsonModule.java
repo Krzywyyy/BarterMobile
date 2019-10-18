@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.retrofit.modules;
+package pl.krzywyyy.barter.http.retrofit.modules;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
