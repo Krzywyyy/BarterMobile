@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.http;
+package pl.krzywyyy.barter.http.services;
 
 import pl.krzywyyy.barter.model.domain.User;
 import retrofit2.Call;
@@ -12,5 +12,4 @@ public interface UserService {
 
     @POST("users/login")
     Call signIn(@Body User user);
-
 }
