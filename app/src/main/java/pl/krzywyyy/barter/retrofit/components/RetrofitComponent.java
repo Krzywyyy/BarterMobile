@@ -1,10 +1,10 @@
-package pl.krzywyyy.barter.http.retrofit.components;
+package pl.krzywyyy.barter.retrofit.components;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import pl.krzywyyy.barter.http.retrofit.modules.GsonModule;
-import pl.krzywyyy.barter.http.retrofit.modules.RetrofitModule;
+import pl.krzywyyy.barter.retrofit.modules.GsonModule;
+import pl.krzywyyy.barter.retrofit.modules.RetrofitModule;
 import retrofit2.Retrofit;
 
 @Singleton

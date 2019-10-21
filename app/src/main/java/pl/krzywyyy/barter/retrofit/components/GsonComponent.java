@@ -1,11 +1,11 @@
-package pl.krzywyyy.barter.http.retrofit.components;
+package pl.krzywyyy.barter.retrofit.components;
 
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import pl.krzywyyy.barter.http.retrofit.modules.GsonModule;
+import pl.krzywyyy.barter.retrofit.modules.GsonModule;
 
 @Singleton
 @Component(modules = GsonModule.class)

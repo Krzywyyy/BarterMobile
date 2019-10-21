@@ -15,10 +15,21 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 import pl.krzywyyy.barter.R;
+import pl.krzywyyy.barter.model.domain.User;
+import pl.krzywyyy.barter.retrofit.MyApplication;
+import pl.krzywyyy.barter.retrofit.api.UserInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginFragment extends Fragment {
 
+    @Inject
+    Retrofit retrofit;
     private EditText emailInput;
     private EditText passwordInput;
     private Button signInButton;
@@ -31,7 +42,11 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
+        try {
+            ((MyApplication) getActivity().getApplication()).getRetrofitComponent().getRetrofit();
+        } catch (NullPointerException e) {
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
         assignItems(view);
 
         return view;
@@ -52,13 +67,29 @@ public class LoginFragment extends Fragment {
             FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.authentication_placeholder, new RegisterFragment());
             fragmentTransaction.commit();
-        } catch(NullPointerException npe){
+        } catch (NullPointerException npe) {
             Toast.makeText(getContext(), npe.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void signIn() {
-        Toast.makeText(getContext(), emailInput.getText().toString() + passwordInput.getText().toString(), Toast.LENGTH_LONG).show();
+        UserInterface userService = retrofit.create(UserInterface.class);
+
+        Call call = userService.signUp(new User());
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Toast.makeText(getContext(), response.message(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //Toast.makeText(getContext(), emailInput.getText().toString() + passwordInput.getText().toString(), Toast.LENGTH_LONG).show();
     }
 
 }
