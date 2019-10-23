@@ -19,8 +19,8 @@ import javax.inject.Inject;
 
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.model.domain.User;
-import pl.krzywyyy.barter.retrofit.MyApplication;
-import pl.krzywyyy.barter.retrofit.api.UserInterface;
+import pl.krzywyyy.barter.MyApplication;
+import pl.krzywyyy.barter.api.UserInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,11 +42,10 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        try {
-            ((MyApplication) getActivity().getApplication()).getRetrofitComponent().getRetrofit();
-        } catch (NullPointerException e) {
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        MyApplication.appComponent.inject(this);
+
+        Toast.makeText(getContext(), retrofit.baseUrl().toString(), Toast.LENGTH_SHORT).show();
+
         assignItems(view);
 
         return view;
@@ -75,21 +74,21 @@ public class LoginFragment extends Fragment {
     private void signIn() {
         UserInterface userService = retrofit.create(UserInterface.class);
 
-        Call call = userService.signUp(new User());
+        User user = new User();
+        Call call = userService.signUp(user);
 
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                Toast.makeText(getContext(), response.message(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "GIT: " + response.message(), Toast.LENGTH_LONG).show();
+
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "FAIL: " + t.getMessage(), Toast.LENGTH_LONG).show();
+
             }
         });
-
-        //Toast.makeText(getContext(), emailInput.getText().toString() + passwordInput.getText().toString(), Toast.LENGTH_LONG).show();
     }
-
 }

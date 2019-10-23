@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.retrofit.api;
+package pl.krzywyyy.barter.api;
 
 import java.util.List;
 
