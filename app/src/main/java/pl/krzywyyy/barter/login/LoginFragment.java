@@ -32,8 +32,6 @@ public class LoginFragment extends Fragment {
     Retrofit retrofit;
     private EditText emailInput;
     private EditText passwordInput;
-    private Button signInButton;
-    private TextView signUp;
 
     public LoginFragment() {
     }
@@ -54,8 +52,8 @@ public class LoginFragment extends Fragment {
     private void assignItems(View view) {
         emailInput = view.findViewById(R.id.email);
         passwordInput = view.findViewById(R.id.password);
-        signInButton = view.findViewById(R.id.sign_in_button);
-        signUp = view.findViewById(R.id.sign_up);
+        Button signInButton = view.findViewById(R.id.sign_in_button);
+        TextView signUp = view.findViewById(R.id.sign_up);
 
         signInButton.setOnClickListener(e -> signIn());
         signUp.setOnClickListener(e -> signUp());
