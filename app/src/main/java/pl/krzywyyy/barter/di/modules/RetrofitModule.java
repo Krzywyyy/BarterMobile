@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.http.retrofit.modules;
+package pl.krzywyyy.barter.di.modules;
 
 import com.google.gson.Gson;
 
@@ -10,7 +10,7 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module
+@Module(includes = GsonModule.class)
 public class RetrofitModule {
 
     private String urlPath;

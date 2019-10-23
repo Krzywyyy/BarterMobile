@@ -1,15 +1,15 @@
-package pl.krzywyyy.barter.http.services;
+package pl.krzywyyy.barter.api;
 
 import pl.krzywyyy.barter.model.domain.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-public interface UserService {
+public interface UserInterface {
 
     @POST("users/register")
-    Call signUp(@Body User user);
+    Call<Void> signUp(@Body User user);
 
     @POST("users/login")
-    Call signIn(@Body User user);
+    Call<Void> signIn(@Body User user);
 }

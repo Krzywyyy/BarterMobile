@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.http.services;
+package pl.krzywyyy.barter.api;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface OfferService {
+public interface OfferInterface {
     @POST("offers")
     Call<Offer> save(@Body Offer offer);
 

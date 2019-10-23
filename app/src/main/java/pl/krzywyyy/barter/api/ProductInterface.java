@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.http.services;
+package pl.krzywyyy.barter.api;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface ProductService {
+public interface ProductInterface {
     @POST("products")
     Call<Product> save(@Body Product product);
 
