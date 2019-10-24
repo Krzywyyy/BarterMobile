@@ -17,7 +17,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        if (SharedPreferencesManager.getTokenFromPreferences(getApplicationContext()) == null)
+        if (SharedPreferencesManager.getTokenFromPreferences(getApplicationContext()) != null)
             FragmentReplacer.replaceFragment(this, R.id.authentication_placeholder, new LoginFragment());
         else {
             startActivity(new Intent(this, MainActivity.class));
