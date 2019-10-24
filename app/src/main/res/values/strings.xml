@@ -14,4 +14,8 @@
     <string name="enter_password_again">Podaj hasło ponownie</string>
     <string name="go_back">Wróć</string>
     <string name="registration">Rejestracja</string>
+    <string name="wrong_email_or_password_toast">Błędny email lub hasło</string>
+    <string name="not_matching_passwords_toast">Podane hasła różnią się od siebie</string>
+    <string name="failed_retrofit_request_toast">Wystąpił nieoczekiwany błąd. Spróbuj ponownie później</string>
+    <string name="successful_registration_toast">Pomyślnie utworzono użytkownika</string>
 </resources>
