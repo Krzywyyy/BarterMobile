@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.login;
+package pl.krzywyyy.barter.authentication;
 
 
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.net.HttpURLConnection;
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
@@ -19,6 +22,7 @@ import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.api.UserInterface;
 import pl.krzywyyy.barter.model.domain.User;
 import pl.krzywyyy.barter.utils.FragmentReplacer;
+import pl.krzywyyy.barter.utils.SharedPreferencesManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +36,8 @@ public class LoginFragment extends Fragment {
 
     private EditText emailInput;
     private EditText passwordInput;
+
+    private final String AUTHORIZATION_HEADER = "Authorization";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,15 +69,18 @@ public class LoginFragment extends Fragment {
 
         UserInterface userService = retrofit.create(UserInterface.class);
 
-        Call call = userService.signIn(user);
+        Call<Void> call = userService.signIn(user);
 
-        call.enqueue(new Callback() {
+        call.enqueue(new Callback<Void>() {
             @EverythingIsNonNull
             @Override
             public void onResponse(Call call, Response response) {
-                String authorization = response.headers().get("Authorization");
-                if (authorization != null)
-                    Toast.makeText(getContext(), "GIT: " + authorization, Toast.LENGTH_LONG).show();
+                if (response.code() == HttpURLConnection.HTTP_NO_CONTENT) {
+                    successfulAuthentication(response);
+                    Toast.makeText(getContext(), "Worked", Toast.LENGTH_SHORT).show();
+                } else {
+                    failedAuthentication();
+                }
             }
 
             @EverythingIsNonNull
@@ -87,6 +96,16 @@ public class LoginFragment extends Fragment {
         user.setEmail(String.valueOf(emailInput.getText()));
         user.setPassword(String.valueOf(passwordInput.getText()));
         return user;
+    }
+
+    private void successfulAuthentication(Response response) {
+        String authorization = response.headers().get(AUTHORIZATION_HEADER);
+        SharedPreferencesManager.saveTokenToPreferences(Objects.requireNonNull(getContext()), authorization);
+    }
+
+    private void failedAuthentication() {
+        Toast.makeText(getContext(),"Błędny email lub hasło", Toast.LENGTH_SHORT).show();
+        passwordInput.setText("");
     }
 
     private void signUp() {
