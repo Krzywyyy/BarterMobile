@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.login;
+package pl.krzywyyy.barter.authenticationActivity;
 
 import android.os.Bundle;
 
@@ -14,6 +14,6 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        FragmentReplacer.replaceFragment(getApplicationContext(), R.id.authentication_placeholder, new LoginFragment());
+        FragmentReplacer.replaceFragment(this, R.id.authentication_placeholder, new LoginFragment());
     }
 }
