@@ -1,6 +1,7 @@
-package pl.krzywyyy.barter.login;
+package pl.krzywyyy.barter.authentication;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +13,18 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.net.HttpURLConnection;
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.api.UserInterface;
+import pl.krzywyyy.barter.main.MainActivity;
 import pl.krzywyyy.barter.model.domain.User;
 import pl.krzywyyy.barter.utils.FragmentReplacer;
+import pl.krzywyyy.barter.utils.SharedPreferencesManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,6 +32,8 @@ import retrofit2.Retrofit;
 import retrofit2.internal.EverythingIsNonNull;
 
 public class LoginFragment extends Fragment {
+
+    private final String AUTHORIZATION_HEADER = "Authorization";
 
     @Inject
     Retrofit retrofit;
@@ -63,21 +71,24 @@ public class LoginFragment extends Fragment {
 
         UserInterface userService = retrofit.create(UserInterface.class);
 
-        Call call = userService.signIn(user);
+        Call<Void> call = userService.signIn(user);
 
-        call.enqueue(new Callback() {
+        call.enqueue(new Callback<Void>() {
             @EverythingIsNonNull
             @Override
             public void onResponse(Call call, Response response) {
-                String authorization = response.headers().get("Authorization");
-                if (authorization != null)
-                    Toast.makeText(getContext(), "GIT: " + authorization, Toast.LENGTH_LONG).show();
+                if (response.code() == HttpURLConnection.HTTP_NO_CONTENT) {
+                    successfulAuthentication(response);
+                    startActivity(new Intent(getContext(), MainActivity.class));
+                } else {
+                    failedAuthentication();
+                }
             }
 
             @EverythingIsNonNull
             @Override
             public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getContext(), "FAIL: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.failed_retrofit_request_toast), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -87,6 +98,16 @@ public class LoginFragment extends Fragment {
         user.setEmail(String.valueOf(emailInput.getText()));
         user.setPassword(String.valueOf(passwordInput.getText()));
         return user;
+    }
+
+    private void successfulAuthentication(Response response) {
+        String authorization = response.headers().get(AUTHORIZATION_HEADER);
+        SharedPreferencesManager.saveTokenToPreferences(Objects.requireNonNull(getContext()), authorization);
+    }
+
+    private void failedAuthentication() {
+        Toast.makeText(getContext(), getString(R.string.wrong_email_or_password_toast), Toast.LENGTH_SHORT).show();
+        passwordInput.setText("");
     }
 
     private void signUp() {
