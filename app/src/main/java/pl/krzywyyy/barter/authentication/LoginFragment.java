@@ -1,6 +1,7 @@
 package pl.krzywyyy.barter.authentication;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import javax.inject.Inject;
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.api.UserInterface;
+import pl.krzywyyy.barter.main.MainActivity;
 import pl.krzywyyy.barter.model.domain.User;
 import pl.krzywyyy.barter.utils.FragmentReplacer;
 import pl.krzywyyy.barter.utils.SharedPreferencesManager;
@@ -31,13 +33,13 @@ import retrofit2.internal.EverythingIsNonNull;
 
 public class LoginFragment extends Fragment {
 
+    private final String AUTHORIZATION_HEADER = "Authorization";
+
     @Inject
     Retrofit retrofit;
 
     private EditText emailInput;
     private EditText passwordInput;
-
-    private final String AUTHORIZATION_HEADER = "Authorization";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,7 +79,7 @@ public class LoginFragment extends Fragment {
             public void onResponse(Call call, Response response) {
                 if (response.code() == HttpURLConnection.HTTP_NO_CONTENT) {
                     successfulAuthentication(response);
-                    Toast.makeText(getContext(), "Worked", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getContext(), MainActivity.class));
                 } else {
                     failedAuthentication();
                 }
@@ -86,7 +88,7 @@ public class LoginFragment extends Fragment {
             @EverythingIsNonNull
             @Override
             public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getContext(), "FAIL: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.failed_retrofit_request_toast), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -104,7 +106,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void failedAuthentication() {
-        Toast.makeText(getContext(),"Błędny email lub hasło", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getString(R.string.wrong_email_or_password_toast), Toast.LENGTH_SHORT).show();
         passwordInput.setText("");
     }
 
