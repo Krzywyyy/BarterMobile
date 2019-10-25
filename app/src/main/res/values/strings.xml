@@ -17,4 +17,5 @@
     <string name="failed_retrofit_request_toast">Wystąpił nieoczekiwany błąd. Spróbuj ponownie później</string>
     <string name="successful_registration_toast">Pomyślnie utworzono użytkownika</string>
     <string name="token_expired_toast">Sesja wygasła. Zaloguj się ponownie</string>
+    <string name="welcome_toast">Witaj %s!</string>
 </resources>

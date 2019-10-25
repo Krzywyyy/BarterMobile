@@ -4,13 +4,16 @@ import android.content.Context;
 
 import com.auth0.android.jwt.JWT;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class TokenExplorator {
 
     public static String getNameFromToken(Context context) {
         JWT jwt = getJWT(context);
-        return Objects.requireNonNull(jwt.getSubject()).split("\\.")[0];
+        String userName = Objects.requireNonNull(jwt.getSubject()).split("\\.")[0];
+        return StringUtils.capitalize(userName);
     }
 
     public static boolean isTokenExpired(Context context) {

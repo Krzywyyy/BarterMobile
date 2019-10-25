@@ -25,6 +25,7 @@ import pl.krzywyyy.barter.model.domain.User;
 import pl.krzywyyy.barter.utils.ActivityChanger;
 import pl.krzywyyy.barter.utils.FragmentReplacer;
 import pl.krzywyyy.barter.utils.SharedPreferencesManager;
+import pl.krzywyyy.barter.utils.TokenExplorator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -103,6 +104,8 @@ public class LoginFragment extends Fragment {
     private void successfulAuthentication(Response response) {
         String authorization = response.headers().get(AUTHORIZATION_HEADER);
         SharedPreferencesManager.saveToken(Objects.requireNonNull(getContext()), authorization);
+        String userName = TokenExplorator.getNameFromToken(getContext());
+        showWelcomeMessage(userName);
     }
 
     private void failedAuthentication() {
@@ -112,5 +115,9 @@ public class LoginFragment extends Fragment {
 
     private void signUp() {
         FragmentReplacer.replaceFragment(getContext(), R.id.authentication_placeholder, new RegisterFragment());
+    }
+
+    private void showWelcomeMessage(String userName) {
+        Toast.makeText(getContext(), String.format(getString(R.string.welcome_toast), userName), Toast.LENGTH_SHORT).show();
     }
 }
