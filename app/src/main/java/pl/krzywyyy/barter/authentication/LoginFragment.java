@@ -1,7 +1,6 @@
 package pl.krzywyyy.barter.authentication;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,7 @@ import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.api.UserInterface;
 import pl.krzywyyy.barter.main.MainActivity;
 import pl.krzywyyy.barter.model.domain.User;
+import pl.krzywyyy.barter.utils.ActivityChanger;
 import pl.krzywyyy.barter.utils.FragmentReplacer;
 import pl.krzywyyy.barter.utils.SharedPreferencesManager;
 import retrofit2.Call;
@@ -79,7 +79,7 @@ public class LoginFragment extends Fragment {
             public void onResponse(Call call, Response response) {
                 if (response.code() == HttpURLConnection.HTTP_NO_CONTENT) {
                     successfulAuthentication(response);
-                    startActivity(new Intent(getContext(), MainActivity.class));
+                    ActivityChanger.change(Objects.requireNonNull(getContext()), MainActivity.class);
                 } else {
                     failedAuthentication();
                 }
@@ -102,7 +102,7 @@ public class LoginFragment extends Fragment {
 
     private void successfulAuthentication(Response response) {
         String authorization = response.headers().get(AUTHORIZATION_HEADER);
-        SharedPreferencesManager.saveTokenToPreferences(Objects.requireNonNull(getContext()), authorization);
+        SharedPreferencesManager.saveToken(Objects.requireNonNull(getContext()), authorization);
     }
 
     private void failedAuthentication() {
