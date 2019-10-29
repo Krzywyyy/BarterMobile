@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.authentication;
+package pl.krzywyyy.barter.ui.authentication;
 
 
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import javax.inject.Inject;
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.api.UserInterface;
-import pl.krzywyyy.barter.main.MainActivity;
+import pl.krzywyyy.barter.ui.main.MainActivity;
 import pl.krzywyyy.barter.model.domain.User;
 import pl.krzywyyy.barter.utils.ActivityChanger;
 import pl.krzywyyy.barter.utils.FragmentReplacer;
@@ -104,7 +104,7 @@ public class LoginFragment extends Fragment {
     private void successfulAuthentication(Response response) {
         String authorization = response.headers().get(AUTHORIZATION_HEADER);
         SharedPreferencesManager.saveToken(Objects.requireNonNull(getContext()), authorization);
-        String userName = TokenExplorator.getNameFromToken(getContext());
+        String userName = TokenExplorator.getUserNameFromToken(getContext());
         showWelcomeMessage(userName);
     }
 

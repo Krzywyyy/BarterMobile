@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.authentication;
+package pl.krzywyyy.barter.ui.authentication;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import pl.krzywyyy.barter.R;
-import pl.krzywyyy.barter.main.MainActivity;
+import pl.krzywyyy.barter.ui.main.MainActivity;
 import pl.krzywyyy.barter.utils.FragmentReplacer;
 import pl.krzywyyy.barter.utils.SharedPreferencesManager;
 import pl.krzywyyy.barter.utils.TokenExplorator;
