@@ -11,10 +11,4 @@
         android:label="home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/nav_second"
-        android:name="pl.krzywyyy.barter.ui.main.secondFragment.SecondFragment"
-        android:label="second"
-        tools:layout="@layout/fragment_second" />
-
 </navigation>

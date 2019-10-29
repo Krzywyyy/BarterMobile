@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         setUserDetailsInMenu(navigationView);
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home,R.id.nav_second)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home)
                 .setDrawerLayout(drawer)
                 .build();
 

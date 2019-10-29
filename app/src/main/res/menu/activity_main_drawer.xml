@@ -19,9 +19,9 @@
     <item android:title="Inne">
         <menu>
             <item
-                android:id="@+id/nav_second"
+
                 android:icon="@drawable/ic_launcher_foreground"
-                android:title="Second" />
+                android:title="@string/sign_out" />
         </menu>
     </item>
 </menu>
