@@ -1,13 +1,10 @@
 package pl.krzywyyy.barter.ui.main;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -61,12 +58,6 @@ public class MainActivity extends AppCompatActivity {
         ActivityChanger.change(this, AuthenticationActivity.class);
         Toast.makeText(this, getString(R.string.successful_sign_out), Toast.LENGTH_SHORT).show();
         finish();
-        return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_app_menu, menu);
         return true;
     }
 

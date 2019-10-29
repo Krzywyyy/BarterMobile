@@ -18,10 +18,8 @@
     <string name="successful_registration_toast">Pomyślnie utworzono użytkownika</string>
     <string name="token_expired_toast">Sesja wygasła. Zaloguj się ponownie</string>
     <string name="welcome_toast">Witaj %s!</string>
-    <string name="toolbar_icon_content_description">app_icon</string>
     <string name="settings">Ustawienia</string>
     <string name="sign_out">Wyloguj się</string>
-    <string name="signed_in_as">Zalogowany jako:</string>
     <string name="successful_sign_out">Wylogowano pomyślnie</string>
     <string name="my_products">Moje produkty</string>
     <string name="my_offers">Moje oferty</string>
