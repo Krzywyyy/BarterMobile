@@ -19,8 +19,11 @@
     <item android:title="Inne">
         <menu>
             <item
-
-                android:icon="@drawable/ic_launcher_foreground"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:title="@string/settings" />
+            <item
+                android:id="@+id/sign_out_button"
+                android:icon="@android:drawable/ic_lock_power_off"
                 android:title="@string/sign_out" />
         </menu>
     </item>

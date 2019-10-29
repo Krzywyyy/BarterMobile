@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.ui.main.MainActivity;
+import pl.krzywyyy.barter.utils.ActivityChanger;
 import pl.krzywyyy.barter.utils.FragmentReplacer;
 import pl.krzywyyy.barter.utils.SharedPreferencesManager;
 import pl.krzywyyy.barter.utils.TokenExplorator;
@@ -41,7 +42,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     }
 
     private void redirectToMainApp() {
-        startActivity(new Intent(this, MainActivity.class));
+        ActivityChanger.change(this, MainActivity.class);
         finish();
     }
 

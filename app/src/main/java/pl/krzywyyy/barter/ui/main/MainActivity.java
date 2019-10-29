@@ -1,12 +1,13 @@
 package pl.krzywyyy.barter.ui.main;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,6 +19,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.Objects;
 
 import pl.krzywyyy.barter.R;
+import pl.krzywyyy.barter.ui.authentication.AuthenticationActivity;
+import pl.krzywyyy.barter.utils.ActivityChanger;
+import pl.krzywyyy.barter.utils.SharedPreferencesManager;
 import pl.krzywyyy.barter.utils.TokenExplorator;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+        navigationView.getMenu().findItem(R.id.sign_out_button).setOnMenuItemClickListener(e -> signOut());
+
         setUserDetailsInMenu(navigationView);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home)
@@ -47,9 +53,11 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_app_menu, menu);
+    private boolean signOut() {
+        SharedPreferencesManager.clearSharedPreferences(getApplicationContext());
+        ActivityChanger.change(this, AuthenticationActivity.class);
+        Toast.makeText(this, getString(R.string.successful_sign_out), Toast.LENGTH_SHORT).show();
+        finish();
         return true;
     }
 
@@ -68,5 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
         TextView userEmail = navHeaderView.findViewById(R.id.menu_user_email);
         userEmail.setText(TokenExplorator.getUserEmailFromToken(getApplicationContext()));
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START);
+        else
+            super.onBackPressed();
     }
 }

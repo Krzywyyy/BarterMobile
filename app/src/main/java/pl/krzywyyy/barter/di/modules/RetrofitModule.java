@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(includes = GsonModule.class)
 public class RetrofitModule {
 
-    private String urlPath;
+    private final String urlPath;
 
     public RetrofitModule(String urlPath) {
         this.urlPath = urlPath;
