@@ -3,8 +3,8 @@ package pl.krzywyyy.barter.di.components;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import pl.krzywyyy.barter.authentication.LoginFragment;
-import pl.krzywyyy.barter.authentication.RegisterFragment;
+import pl.krzywyyy.barter.ui.authentication.LoginFragment;
+import pl.krzywyyy.barter.ui.authentication.RegisterFragment;
 import pl.krzywyyy.barter.di.modules.RetrofitModule;
 
 @Singleton

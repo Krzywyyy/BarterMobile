@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.authentication;
+package pl.krzywyyy.barter.ui.authentication;
 
 
 import android.os.Bundle;
