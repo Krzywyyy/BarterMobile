@@ -1,5 +1,4 @@
-package pl.krzywyyy.barter.authentication;
-
+package pl.krzywyyy.barter.ui.authentication;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import java.net.HttpURLConnection;
 import java.util.Objects;
@@ -20,10 +21,9 @@ import javax.inject.Inject;
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.api.UserInterface;
-import pl.krzywyyy.barter.main.MainActivity;
 import pl.krzywyyy.barter.model.domain.User;
+import pl.krzywyyy.barter.ui.main.MainActivity;
 import pl.krzywyyy.barter.utils.ActivityChanger;
-import pl.krzywyyy.barter.utils.FragmentReplacer;
 import pl.krzywyyy.barter.utils.SharedPreferencesManager;
 import pl.krzywyyy.barter.utils.TokenExplorator;
 import retrofit2.Call;
@@ -57,14 +57,14 @@ public class LoginFragment extends Fragment {
         emailInput = view.findViewById(R.id.email);
         passwordInput = view.findViewById(R.id.password);
         Button signInButton = view.findViewById(R.id.sign_in_button);
-        TextView signUp = view.findViewById(R.id.sign_up);
+        TextView signUp = view.findViewById(R.id.nav_register);
 
         setButtonsListeners(signInButton, signUp);
     }
 
     private void setButtonsListeners(Button signInButton, TextView signUp) {
         signInButton.setOnClickListener(e -> signIn());
-        signUp.setOnClickListener(e -> signUp());
+        signUp.setOnClickListener(this::signUp);
     }
 
     private void signIn() {
@@ -104,7 +104,7 @@ public class LoginFragment extends Fragment {
     private void successfulAuthentication(Response response) {
         String authorization = response.headers().get(AUTHORIZATION_HEADER);
         SharedPreferencesManager.saveToken(Objects.requireNonNull(getContext()), authorization);
-        String userName = TokenExplorator.getNameFromToken(getContext());
+        String userName = TokenExplorator.getUserNameFromToken(getContext());
         showWelcomeMessage(userName);
     }
 
@@ -113,8 +113,9 @@ public class LoginFragment extends Fragment {
         passwordInput.setText("");
     }
 
-    private void signUp() {
-        FragmentReplacer.replaceFragment(getContext(), R.id.authentication_placeholder, new RegisterFragment());
+    private void signUp(View view) {
+        NavDirections action = LoginFragmentDirections.actionNavLoginToNavRegister();
+        Navigation.findNavController(view).navigate(action);
     }
 
     private void showWelcomeMessage(String userName) {

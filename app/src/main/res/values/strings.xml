@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Barter</string>
+    <string name="app_name">Barter studencki WAT</string>
     <string name="password">Hasło</string>
     <string name="email">Email studencki</string>
     <string name="watman">Watman</string>
@@ -18,4 +18,9 @@
     <string name="successful_registration_toast">Pomyślnie utworzono użytkownika</string>
     <string name="token_expired_toast">Sesja wygasła. Zaloguj się ponownie</string>
     <string name="welcome_toast">Witaj %s!</string>
+    <string name="settings">Ustawienia</string>
+    <string name="sign_out">Wyloguj się</string>
+    <string name="successful_sign_out">Wylogowano pomyślnie</string>
+    <string name="my_products">Moje produkty</string>
+    <string name="my_offers">Moje oferty</string>
 </resources>

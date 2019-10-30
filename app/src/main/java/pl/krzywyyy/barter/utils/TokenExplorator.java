@@ -10,10 +10,15 @@ import java.util.Objects;
 
 public class TokenExplorator {
 
-    public static String getNameFromToken(Context context) {
+    public static String getUserNameFromToken(Context context) {
         JWT jwt = getJWT(context);
         String userName = Objects.requireNonNull(jwt.getSubject()).split("\\.")[0];
         return StringUtils.capitalize(userName);
+    }
+
+    public static String getUserEmailFromToken(Context context){
+        JWT jwt = getJWT(context);
+        return Objects.requireNonNull(jwt.getSubject());
     }
 
     public static boolean isTokenExpired(Context context) {
