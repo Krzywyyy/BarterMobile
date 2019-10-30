@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import java.net.HttpURLConnection;
 
@@ -19,7 +21,6 @@ import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.api.UserInterface;
 import pl.krzywyyy.barter.model.domain.User;
-import pl.krzywyyy.barter.utils.FragmentReplacer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,15 +55,16 @@ public class RegisterFragment extends Fragment {
         Button backToLoginButton = view.findViewById(R.id.back_to_login_button);
         Button signUpButton = view.findViewById(R.id.sign_up_button);
 
-        backToLoginButton.setOnClickListener(e -> backToLoginFragment());
-        signUpButton.setOnClickListener(e -> signUp());
+        backToLoginButton.setOnClickListener(this::backToLoginFragment);
+        signUpButton.setOnClickListener(this::signUp);
     }
 
-    private void backToLoginFragment() {
-        FragmentReplacer.replaceFragment(getContext(), R.id.authentication_placeholder, new LoginFragment());
+    private void backToLoginFragment(View view) {
+        NavDirections action = RegisterFragmentDirections.actionNavRegisterToNavLogin();
+        Navigation.findNavController(view).navigate(action);
     }
 
-    private void signUp() {
+    private void signUp(View view) {
         if (!checkIfPasswordsMatches()) {
             Toast.makeText(getContext(), getString(R.string.not_matching_passwords_toast), Toast.LENGTH_SHORT).show();
             return;
@@ -70,7 +72,7 @@ public class RegisterFragment extends Fragment {
 
         User registrationUser = createUserWithRegistrationCredentials();
 
-        registerNewUser(registrationUser);
+        registerNewUser(view, registrationUser);
     }
 
     private boolean checkIfPasswordsMatches() {
@@ -84,7 +86,7 @@ public class RegisterFragment extends Fragment {
         return registrationUser;
     }
 
-    private void registerNewUser(User registrationUser) {
+    private void registerNewUser(View view, User registrationUser) {
         UserInterface userService = retrofit.create(UserInterface.class);
 
         Call<Void> call = userService.signUp(registrationUser);
@@ -94,7 +96,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.code() == HttpURLConnection.HTTP_OK) {
-                    FragmentReplacer.replaceFragment(getContext(), R.id.authentication_placeholder, new LoginFragment());
+                    backToLoginFragment(view);
                     Toast.makeText(getContext(), getString(R.string.successful_registration_toast), Toast.LENGTH_SHORT).show();
                 }
             }
