@@ -9,6 +9,7 @@ public class Product {
     private int id;
     private String title;
     private String description;
+    private String image;
     private ProductCategories category;
     private Specializations specialization;
     private int userId;
