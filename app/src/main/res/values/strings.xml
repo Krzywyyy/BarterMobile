@@ -23,4 +23,5 @@
     <string name="successful_sign_out">Wylogowano pomyślnie</string>
     <string name="my_products">Moje produkty</string>
     <string name="my_offers">Moje oferty</string>
+    <string name="product_image">Zdjęcie produktu</string>
 </resources>
