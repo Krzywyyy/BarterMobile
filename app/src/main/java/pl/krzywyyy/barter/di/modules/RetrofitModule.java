@@ -7,10 +7,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module(includes = GsonModule.class)
+@Module(includes = {GsonModule.class, OkHttpClientModule.class})
 public class RetrofitModule {
 
     private final String urlPath;
@@ -22,10 +23,11 @@ public class RetrofitModule {
     @Inject
     @Singleton
     @Provides
-    public Retrofit provideRetrofit(Gson gson) {
+    public Retrofit provideRetrofit(Gson gson, OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(urlPath)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
                 .build();
     }
 }

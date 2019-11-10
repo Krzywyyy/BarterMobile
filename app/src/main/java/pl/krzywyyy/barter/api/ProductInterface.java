@@ -10,13 +10,17 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ProductInterface {
     @POST("products")
     Call<Product> save(@Body Product product);
 
     @GET("products")
-    Call<List<Product>> findAll();
+    Call<List<Product>> findAll(@Query("page") int page);
+
+    @GET("products/my")
+    Call<List<Product>> findAllUserProducts();
 
     @GET("products/{productId}")
     Call<Product> find(@Path("productId") int productId);

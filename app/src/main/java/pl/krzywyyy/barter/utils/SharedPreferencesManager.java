@@ -25,7 +25,7 @@ public class SharedPreferencesManager {
         editor.apply();
     }
 
-    static String getToken(Context context) {
+    public static String getToken(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(pref, MODE_PRIVATE);
         return sharedPreferences.getString(pref, null);
     }
