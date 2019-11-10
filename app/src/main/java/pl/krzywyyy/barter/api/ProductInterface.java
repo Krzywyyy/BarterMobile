@@ -18,6 +18,9 @@ public interface ProductInterface {
     @GET("products")
     Call<List<Product>> findAll();
 
+    @GET("products/my")
+    Call<List<Product>> findAllUserProducts();
+
     @GET("products/{productId}")
     Call<Product> find(@Path("productId") int productId);
 
