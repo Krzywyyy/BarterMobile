@@ -43,10 +43,8 @@ public class UserProductsFragment extends Fragment {
 
             productsAdapter = new UserProductsAdapter(products);
             mRecyclerView.setAdapter(productsAdapter);
-            Toast.makeText(getContext(), "Zmiana: " + productViews.size(), Toast.LENGTH_SHORT).show();
         });
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(productsAdapter);
 
         return view;
