@@ -21,13 +21,12 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
 
     public UserProductsAdapter(List<ProductView> productViews) {
         this.productViewList = productViews;
-
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_card_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_product_card_view, parent, false);
         return new ViewHolder(view);
     }
 

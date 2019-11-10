@@ -32,11 +32,11 @@ public class UserProductsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_products, container, false);
+        mViewModel = ViewModelProviders.of(this).get(UserProductsViewModel.class);
         mRecyclerView = view.findViewById(R.id.users_products_recycler_view);
 
-        mViewModel = ViewModelProviders.of(this).get(UserProductsViewModel.class);
-
         productsAdapter = new UserProductsAdapter(products);
+        mRecyclerView.setAdapter(productsAdapter);
 
         mViewModel.getProductViews().observe(this, productViews -> {
             products = productViews;
@@ -44,8 +44,6 @@ public class UserProductsFragment extends Fragment {
             productsAdapter = new UserProductsAdapter(products);
             mRecyclerView.setAdapter(productsAdapter);
         });
-
-        mRecyclerView.setAdapter(productsAdapter);
 
         return view;
     }
