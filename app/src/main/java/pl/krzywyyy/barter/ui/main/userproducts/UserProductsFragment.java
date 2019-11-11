@@ -4,22 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.model.domain.ProductView;
-import pl.krzywyyy.barter.model.domain.User;
 
 public class UserProductsFragment extends Fragment {
 
@@ -35,13 +31,13 @@ public class UserProductsFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(UserProductsViewModel.class);
         mRecyclerView = view.findViewById(R.id.users_products_recycler_view);
 
-        productsAdapter = new UserProductsAdapter(products);
+        productsAdapter = new UserProductsAdapter(products, getContext());
         mRecyclerView.setAdapter(productsAdapter);
 
         mViewModel.getProductViews().observe(this, productViews -> {
             products = productViews;
 
-            productsAdapter = new UserProductsAdapter(products);
+            productsAdapter = new UserProductsAdapter(products, getContext());
             mRecyclerView.setAdapter(productsAdapter);
         });
 

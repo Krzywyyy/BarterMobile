@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".ui.main.productdetails.ProductDetailsFragment">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <Button
+        android:id="@+id/exit_detail_dialog"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:background="@android:color/transparent"
+        android:text="@string/x"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/exit_detail_dialog"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:background="@android:color/transparent"
-            android:text="@string/x"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -67,6 +67,6 @@
                 android:text="@string/make_an_offer" />
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+</LinearLayout>
