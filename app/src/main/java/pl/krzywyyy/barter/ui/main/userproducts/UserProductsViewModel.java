@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.ui.main.home;
+package pl.krzywyyy.barter.ui.main.userproducts;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -19,26 +19,26 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.internal.EverythingIsNonNull;
 
-public class HomeViewModel extends ViewModel {
+public class UserProductsViewModel extends ViewModel {
 
     @Inject
     Retrofit retrofit;
 
     private MutableLiveData<List<ProductView>> productViews;
 
-    public HomeViewModel() {
+    public UserProductsViewModel() {
         MyApplication.appComponent.inject(this);
-        productViews = getAllProducts();
+        productViews = getUserProducts();
     }
 
     public MutableLiveData<List<ProductView>> getProductViews() {
         return productViews;
     }
 
-    private MutableLiveData<List<ProductView>> getAllProducts() {
+    private MutableLiveData<List<ProductView>> getUserProducts() {
         ProductInterface productService = retrofit.create(ProductInterface.class);
 
-        Call<List<Product>> call = productService.findAll(1);
+        Call<List<Product>> call = productService.findAllUserProducts();
 
         MutableLiveData<List<ProductView>> products = new MutableLiveData<>();
 

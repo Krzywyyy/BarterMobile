@@ -39,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.main_nav_view);
 
-        navigationView.getMenu().findItem(R.id.sign_out_button).setOnMenuItemClickListener(e -> signOut());
+        navigationView.getMenu().findItem(R.id.sign_out_button)
+                .setOnMenuItemClickListener(e -> signOut());
 
         setUserDetailsInMenu(navigationView);
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home, R.id.nav_user_products)
                 .setDrawerLayout(drawer)
                 .build();
 
