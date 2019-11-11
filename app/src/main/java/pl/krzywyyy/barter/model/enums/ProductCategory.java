@@ -1,5 +1,5 @@
 package pl.krzywyyy.barter.model.enums;
 
-public enum ProductCategories {
+public enum ProductCategory {
     BOOK, NOTES, COACHING, OTHER
 }
