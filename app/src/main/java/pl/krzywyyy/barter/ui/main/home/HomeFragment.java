@@ -29,13 +29,13 @@ public class HomeFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         mRecyclerView = view.findViewById(R.id.all_products_recycler_view);
 
-        productsAdapter = new HomeAdapter(products);
+        productsAdapter = new HomeAdapter(products, getContext());
         mRecyclerView.setAdapter(productsAdapter);
 
         mViewModel.getProductViews().observe(this, productViews -> {
             products = productViews;
 
-            productsAdapter = new HomeAdapter(products);
+            productsAdapter = new HomeAdapter(products, getContext());
             mRecyclerView.setAdapter(productsAdapter);
         });
 

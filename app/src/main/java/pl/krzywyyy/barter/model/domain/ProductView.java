@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProductView {
+    private int id;
     private String title;
     private Bitmap image;
 }

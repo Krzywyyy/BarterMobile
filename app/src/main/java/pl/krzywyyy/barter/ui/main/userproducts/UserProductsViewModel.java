@@ -50,6 +50,7 @@ public class UserProductsViewModel extends ViewModel {
                     List<ProductView> productViews = new ArrayList<>();
                     for (Product product : response.body()) {
                         productViews.add(new ProductView(
+                                product.getId(),
                                 product.getTitle(),
                                 ImageEncoder.toImage(product.getImage())
                         ));
