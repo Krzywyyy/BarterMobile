@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,6 @@ import pl.krzywyyy.barter.model.domain.ProductView;
 public class UserProductsFragment extends Fragment {
 
     private List<ProductView> products = new ArrayList<>();
-    private UserProductsViewModel mViewModel;
     private RecyclerView mRecyclerView;
     private UserProductsAdapter productsAdapter;
 
@@ -28,7 +29,7 @@ public class UserProductsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_products, container, false);
-        mViewModel = ViewModelProviders.of(this).get(UserProductsViewModel.class);
+        UserProductsViewModel mViewModel = ViewModelProviders.of(this).get(UserProductsViewModel.class);
         mRecyclerView = view.findViewById(R.id.users_products_recycler_view);
 
         productsAdapter = new UserProductsAdapter(products, getContext());
@@ -40,6 +41,9 @@ public class UserProductsFragment extends Fragment {
             productsAdapter = new UserProductsAdapter(products, getContext());
             mRecyclerView.setAdapter(productsAdapter);
         });
+
+        FloatingActionButton fab = view.findViewById(R.id.add_product_fab);
+        //fab.setOnClickListener();
 
         return view;
     }

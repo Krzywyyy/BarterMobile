@@ -17,7 +17,7 @@ public class MyApplication extends Application {
         super.onCreate();
 
         appComponent = DaggerAppComponent.builder()
-                .retrofitModule(new RetrofitModule("http://192.168.0.136:8080"))
+                .retrofitModule(new RetrofitModule("http://192.168.1.107:8080"))
                 .gsonModule(new GsonModule())
                 .okHttpClientModule(new OkHttpClientModule(getApplicationContext()))
                 .build();

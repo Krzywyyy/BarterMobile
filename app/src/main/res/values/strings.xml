@@ -27,4 +27,6 @@
     <string name="home">Strona główna</string>
     <string name="make_an_offer">Złóż ofertę</string>
     <string name="x">X</string>
+    <string name="others">Inne</string>
+    <string name="authorization_header">Authorization</string>
 </resources>
