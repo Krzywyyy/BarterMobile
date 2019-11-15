@@ -15,7 +15,6 @@ import pl.krzywyyy.barter.R;
 
 public class ProductDetailsFragment extends DialogFragment {
 
-    private ProductDetailsViewModel mViewModel;
     private ImageView productImage;
     private TextView productTitle;
     private TextView productDescription;
@@ -33,7 +32,7 @@ public class ProductDetailsFragment extends DialogFragment {
 
         view.findViewById(R.id.exit_detail_dialog).setOnClickListener(e -> this.dismiss());
 
-        mViewModel = new ProductDetailsViewModel(productId);
+        ProductDetailsViewModel mViewModel = new ProductDetailsViewModel(productId);
         productImage = view.findViewById(R.id.product_detail_image);
         productTitle = view.findViewById(R.id.product_detail_title);
         productDescription = view.findViewById(R.id.product_detail_description);

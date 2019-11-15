@@ -18,7 +18,6 @@ import pl.krzywyyy.barter.model.domain.ProductView;
 public class HomeFragment extends Fragment {
 
     private List<ProductView> products = new ArrayList<>();
-    private HomeViewModel mViewModel;
     private RecyclerView mRecyclerView;
     private HomeAdapter productsAdapter;
 
@@ -26,7 +25,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        HomeViewModel mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         mRecyclerView = view.findViewById(R.id.all_products_recycler_view);
 
         productsAdapter = new HomeAdapter(products, getContext());
