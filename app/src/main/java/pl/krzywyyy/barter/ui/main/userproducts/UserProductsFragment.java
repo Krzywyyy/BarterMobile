@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,9 +17,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.model.domain.ProductView;
+import pl.krzywyyy.barter.ui.main.newproduct.NewProductFragment;
 
 public class UserProductsFragment extends Fragment {
 
@@ -43,9 +47,17 @@ public class UserProductsFragment extends Fragment {
         });
 
         FloatingActionButton fab = view.findViewById(R.id.add_product_fab);
-        //fab.setOnClickListener();
+        fab.setOnClickListener(e -> showAddNewProductDialog());
 
         return view;
+    }
+
+    private void showAddNewProductDialog() {
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        String newProductDialogFragmentName = "newProductDialog";
+        fragmentTransaction.addToBackStack(newProductDialogFragmentName);
+        DialogFragment newProductDialogFragment = new NewProductFragment();
+        newProductDialogFragment.show(fragmentTransaction, newProductDialogFragmentName);
     }
 
 }
