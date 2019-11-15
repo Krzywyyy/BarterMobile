@@ -46,8 +46,8 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
                 FragmentTransaction fragmentTransaction = ((AppCompatActivity) context)
                         .getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(dialogFragmentName);
-                DialogFragment dialogFragment = new ProductDetailsFragment(productViewList.get(position).getId());
-                dialogFragment.show(fragmentTransaction, dialogFragmentName);
+                DialogFragment productDetailsDialogFragment = new ProductDetailsFragment(productViewList.get(position).getId());
+                productDetailsDialogFragment.show(fragmentTransaction, dialogFragmentName);
             });
         }
     }
