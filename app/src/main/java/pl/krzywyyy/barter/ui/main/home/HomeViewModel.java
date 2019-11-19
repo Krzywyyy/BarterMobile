@@ -25,23 +25,24 @@ public class HomeViewModel extends ViewModel {
     Retrofit retrofit;
 
     private MutableLiveData<List<ProductView>> productViews;
-    private MutableLiveData<List<ProductView>> newProducts = new MutableLiveData<>();
+    private MutableLiveData<List<ProductView>> newProducts;
 
     public HomeViewModel() {
         MyApplication.appComponent.inject(this);
         productViews = getProducts(1);
+        newProducts = new MutableLiveData<>();
     }
 
-    public void loadNextProducts(int page){
-        newProducts = getProducts(page);
-    }
-
-    public MutableLiveData<List<ProductView>> getProductViews() {
+    MutableLiveData<List<ProductView>> getProductViews() {
         return productViews;
     }
 
-    public MutableLiveData<List<ProductView>> getNewProducts() {
+    MutableLiveData<List<ProductView>> getNewProducts() {
         return newProducts;
+    }
+
+    void loadNextProducts(int page) {
+        newProducts = getProducts(page);
     }
 
     private MutableLiveData<List<ProductView>> getProducts(int page) {
