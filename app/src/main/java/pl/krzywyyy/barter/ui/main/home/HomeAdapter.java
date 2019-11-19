@@ -21,13 +21,18 @@ import pl.krzywyyy.barter.ui.main.productdetails.ProductDetailsFragment;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
-    private final List<ProductView> productViewList;
     private final Context context;
     private final String dialogFragmentName = "detailDialog";
+    private List<ProductView> productViewList;
 
     public HomeAdapter(List<ProductView> productViews, Context context) {
         this.productViewList = productViews;
         this.context = context;
+    }
+
+    public void addItems(List<ProductView> productViewList) {
+        this.productViewList.addAll(productViewList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -43,11 +48,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             holder.productTitle.setText(productViewList.get(position).getTitle());
             holder.productImage.setImageBitmap(productViewList.get(position).getImage());
             holder.itemView.setOnClickListener(e -> {
-                FragmentTransaction fragmentTransaction = ((AppCompatActivity) context)
-                        .getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.addToBackStack(dialogFragmentName);
-                DialogFragment productDetailsDialogFragment = new ProductDetailsFragment(productViewList.get(position).getId());
-                productDetailsDialogFragment.show(fragmentTransaction, dialogFragmentName);
+                showProductDetailDialog(position);
             });
         }
     }
@@ -55,6 +56,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return productViewList != null ? productViewList.size() : 0;
+    }
+
+    private void showProductDetailDialog(int position) {
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity) context)
+                .getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.addToBackStack(dialogFragmentName);
+        DialogFragment productDetailsDialogFragment = new ProductDetailsFragment(productViewList.get(position).getId());
+        productDetailsDialogFragment.show(fragmentTransaction, dialogFragmentName);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
