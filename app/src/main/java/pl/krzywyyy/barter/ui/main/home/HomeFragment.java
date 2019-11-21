@@ -45,9 +45,8 @@ public class HomeFragment extends Fragment {
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
                 if (!mRecyclerView.canScrollVertically(1)) {
                     mViewModel.loadNextProducts(page);
                     mViewModel.getNewProducts().observe(
