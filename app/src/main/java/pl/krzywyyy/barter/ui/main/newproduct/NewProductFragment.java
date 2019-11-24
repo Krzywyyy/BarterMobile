@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import pl.krzywyyy.barter.R;
+import pl.krzywyyy.barter.databinding.FragmentNewProductBinding;
 import pl.krzywyyy.barter.utils.BitmapLoader;
 
 public class NewProductFragment extends DialogFragment {
@@ -31,26 +33,25 @@ public class NewProductFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        NewProductViewModel mViewModel = ViewModelProviders.of(this).get(NewProductViewModel.class);
-        View view = inflater.inflate(R.layout.fragment_new_product, container, false);
+        NewProductViewModel mViewModel = new NewProductViewModel(getContext());
 
+        FragmentNewProductBinding fragmentNewProductBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_product, container, false);
         checkIfReadExternalPermissionIsGranted();
+        fragmentNewProductBinding.setNewProductViewModel(mViewModel);
 
-        view.findViewById(R.id.new_product_image_button).setOnClickListener(e -> loadImageFromGallery());
-        view.findViewById(R.id.exit_new_product_dialog).setOnClickListener(e -> this.dismiss());
-
-        return view;
+        fragmentNewProductBinding.getRoot().findViewById(R.id.new_product_image_button).setOnClickListener(e -> loadImageFromGallery());
+        fragmentNewProductBinding.getRoot().findViewById(R.id.exit_new_product_dialog).setOnClickListener(e -> this.dismiss());
+        fragmentNewProductBinding.getRoot().findViewById(R.id.add_new_product_button).setOnClickListener(e -> mViewModel.tost(getContext()));
+        return fragmentNewProductBinding.getRoot();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
         if (requestCode == RESULT_GALLERY) {
             if (data != null) {
                 Uri imageUri = data.getData();
                 if (imageUri != null) {
                     try {
-
                         Bitmap bitmap = BitmapLoader.loadBitmapFromUri(getContext(), imageUri);
                         ImageView productImage = Objects.requireNonNull(getView()).findViewById(R.id.new_product_image);
                         productImage.setImageBitmap(bitmap);
