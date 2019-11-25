@@ -1,12 +1,8 @@
 package pl.krzywyyy.barter.databinding;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
@@ -17,13 +13,8 @@ import java.util.Arrays;
 import pl.krzywyyy.barter.model.enums.ProductCategory;
 import pl.krzywyyy.barter.model.enums.Specialization;
 
-class SpinnerBindings {
-
-    @BindingAdapter(value = "android:entries")
-    public static void setEntries(Spinner spinner, SpinnerAdapter spinnerAdapter) {
-        spinner.setAdapter(spinnerAdapter);
-    }
-
+public class SpinnerSelectedValueBinding {
+    
     @BindingAdapter(
             value = {"bind:productCategory", "bind:productCategoryAttrChanged"},
             requireAll = false)
@@ -76,18 +67,5 @@ class SpinnerBindings {
             event = "bind:productSpecializationAttrChanged")
     public static Specialization getProductSpecialization(Spinner spinner) {
         return (Specialization) spinner.getSelectedItem();
-    }
-
-    @BindingAdapter(value = {"bind:productImage", "bind:productImageAttrChanged"},
-            requireAll = false)
-    public static void setProductImage(ImageView imageView,
-                                       Bitmap bitmap) {
-        imageView.setImageBitmap(bitmap);
-    }
-
-    @InverseBindingAdapter(attribute = "bind:productImage",
-            event = "bind:productImageAttrChanged")
-    public static Bitmap getProductImage(ImageView imageView) {
-        return ((BitmapDrawable) imageView.getDrawable()).getBitmap();
     }
 }
