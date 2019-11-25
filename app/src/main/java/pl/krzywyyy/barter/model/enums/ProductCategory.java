@@ -8,7 +8,7 @@ public enum ProductCategory {
     BOOK(ProductCategoryDictionary.BOOK),
     NOTES(ProductCategoryDictionary.NOTES),
     COACHING(ProductCategoryDictionary.COACHING),
-    OTHER(ProductCategoryDictionary.OTHERS);
+    OTHER(ProductCategoryDictionary.OTHER);
 
     private String value;
 
