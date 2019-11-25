@@ -22,15 +22,13 @@ import pl.krzywyyy.barter.utils.TokenExplorator;
 
 public class AuthenticationActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_login, R.id.nav_register)
+        AppBarConfiguration mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_login, R.id.nav_register)
                 .build();
 
         NavigationView navigationView = findViewById(R.id.auth_nav_view);

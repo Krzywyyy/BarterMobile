@@ -34,8 +34,6 @@ import retrofit2.internal.EverythingIsNonNull;
 
 public class LoginFragment extends Fragment {
 
-    private final String AUTHORIZATION_HEADER = "Authorization";
-
     @Inject
     Retrofit retrofit;
 
@@ -102,7 +100,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void successfulAuthentication(Response response) {
-        String authorization = response.headers().get(AUTHORIZATION_HEADER);
+        String authorization = response.headers().get(getString(R.string.authorization_header));
         SharedPreferencesManager.saveToken(Objects.requireNonNull(getContext()), authorization);
         String userName = TokenExplorator.getUserNameFromToken(getContext());
         showWelcomeMessage(userName);

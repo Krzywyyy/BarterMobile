@@ -27,4 +27,16 @@
     <string name="home">Strona główna</string>
     <string name="make_an_offer">Złóż ofertę</string>
     <string name="x">X</string>
+    <string name="others">Inne</string>
+    <string name="authorization_header">Authorization</string>
+    <string name="title">Nazwa</string>
+    <string name="enter_title">Wprowadź nazwę</string>
+    <string name="description">Opis</string>
+    <string name="enter_description">Wprowadź opis</string>
+    <string name="add">Dodaj</string>
+    <string name="load_image">Dodaj\nzdjęcie</string>
+    <string name="category">Kategoria</string>
+    <string name="specialization">Dziedzina</string>
+    <string name="cannot_read_image">Nie można wczytać pliku</string>
+    <string name="successfully_added_new_product">Pomyślnie dodano produkt</string>
 </resources>

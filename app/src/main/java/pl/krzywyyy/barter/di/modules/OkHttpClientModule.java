@@ -26,15 +26,18 @@ public class OkHttpClientModule {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
 
-        return new OkHttpClient.Builder()
+        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(chain -> {
-                    Request original = chain.request();
-                    Request.Builder requestBuilder = original.newBuilder()
-                            .addHeader("Authorization", SharedPreferencesManager.getToken(context));
-                    Request request = requestBuilder.build();
+                    Request request = chain.request();
+                    if (SharedPreferencesManager.containsToken(context)) {
+                        request = request.newBuilder()
+                                .addHeader("Authorization", SharedPreferencesManager.getToken(context))
+                                .build();
+                    }
                     return chain.proceed(request);
-                })
-                .build();
+                });
+
+        return okBuilder.build();
     }
 }

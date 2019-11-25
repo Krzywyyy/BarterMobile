@@ -4,6 +4,7 @@
     package="pl.krzywyyy.barter">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -15,8 +16,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.main.MainActivity"
-            android:theme="@style/MainAppTheme"/>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/MainAppTheme" />
         <activity android:name=".ui.authentication.AuthenticationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,3 +28,4 @@
     </application>
 
 </manifest>
+

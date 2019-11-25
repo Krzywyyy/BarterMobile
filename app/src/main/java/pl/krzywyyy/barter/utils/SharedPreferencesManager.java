@@ -10,7 +10,7 @@ public class SharedPreferencesManager {
     private static final String pref = "Authorization";
 
     public static void clearSharedPreferences(Context context) {
-        context.getSharedPreferences("Authorization", MODE_PRIVATE).edit().clear().apply();
+        context.getSharedPreferences(pref, MODE_PRIVATE).edit().clear().apply();
     }
 
     public static boolean containsToken(Context context) {

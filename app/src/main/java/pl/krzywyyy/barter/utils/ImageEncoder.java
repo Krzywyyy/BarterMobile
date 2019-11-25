@@ -1,12 +1,20 @@
 package pl.krzywyyy.barter.utils;
 
+
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
+
 public class ImageEncoder {
-    public static Bitmap toImage(String base64) {
-        byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    public static String toBase64(Bitmap bitmap) {
+        byte[] imageByte = getBytesFromBitmap(bitmap);
+        return Base64.encodeToString(imageByte, Base64.DEFAULT);
+    }
+
+    private static byte[] getBytesFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
 }

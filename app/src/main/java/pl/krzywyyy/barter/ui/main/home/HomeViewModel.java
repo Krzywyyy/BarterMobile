@@ -12,7 +12,7 @@ import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.api.ProductInterface;
 import pl.krzywyyy.barter.model.domain.Product;
 import pl.krzywyyy.barter.model.domain.ProductView;
-import pl.krzywyyy.barter.utils.ImageEncoder;
+import pl.krzywyyy.barter.utils.ImageDecoder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,20 +25,30 @@ public class HomeViewModel extends ViewModel {
     Retrofit retrofit;
 
     private MutableLiveData<List<ProductView>> productViews;
+    private MutableLiveData<List<ProductView>> newProducts;
 
     public HomeViewModel() {
         MyApplication.appComponent.inject(this);
-        productViews = getAllProducts();
+        productViews = getProducts(1);
+        newProducts = new MutableLiveData<>();
     }
 
-    public MutableLiveData<List<ProductView>> getProductViews() {
+    MutableLiveData<List<ProductView>> getProductViews() {
         return productViews;
     }
 
-    private MutableLiveData<List<ProductView>> getAllProducts() {
+    MutableLiveData<List<ProductView>> getNewProducts() {
+        return newProducts;
+    }
+
+    void loadNextProducts(int page) {
+        newProducts = getProducts(page);
+    }
+
+    private MutableLiveData<List<ProductView>> getProducts(int page) {
         ProductInterface productService = retrofit.create(ProductInterface.class);
 
-        Call<List<Product>> call = productService.findAll(1);
+        Call<List<Product>> call = productService.findAll(page);
 
         MutableLiveData<List<ProductView>> products = new MutableLiveData<>();
 
@@ -47,15 +57,19 @@ public class HomeViewModel extends ViewModel {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<ProductView> productViews = new ArrayList<>();
+                    if (response.body().size() == 0) {
+                        return;
+                    }
+                    List<ProductView> newProductViews = new ArrayList<>();
+
                     for (Product product : response.body()) {
-                        productViews.add(new ProductView(
+                        newProductViews.add(new ProductView(
                                 product.getId(),
                                 product.getTitle(),
-                                ImageEncoder.toImage(product.getImage())
+                                ImageDecoder.toImage(product.getImage())
                         ));
                     }
-                    products.setValue(productViews);
+                    products.setValue(newProductViews);
                 }
             }
 

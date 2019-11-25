@@ -7,6 +7,7 @@ import pl.krzywyyy.barter.di.modules.RetrofitModule;
 import pl.krzywyyy.barter.ui.authentication.LoginFragment;
 import pl.krzywyyy.barter.ui.authentication.RegisterFragment;
 import pl.krzywyyy.barter.ui.main.home.HomeViewModel;
+import pl.krzywyyy.barter.ui.main.newproduct.NewProductViewModel;
 import pl.krzywyyy.barter.ui.main.productdetails.ProductDetailsViewModel;
 import pl.krzywyyy.barter.ui.main.userproducts.UserProductsViewModel;
 
@@ -22,4 +23,6 @@ public interface AppComponent {
     void inject(HomeViewModel homeViewModel);
 
     void inject(ProductDetailsViewModel productDetailsViewModel);
+
+    void inject(NewProductViewModel newProductViewModel);
 }

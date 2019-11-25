@@ -17,7 +17,7 @@
             android:title="@string/my_offers" />
     </group>
 
-    <item android:title="Inne">
+    <item android:title="@string/others">
         <menu>
             <item
                 android:icon="@android:drawable/ic_menu_preferences"
