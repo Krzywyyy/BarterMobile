@@ -6,14 +6,17 @@ import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
 
 public class ImageViewBinding {
 
     @BindingAdapter(value = {"bind:productImage", "bind:productImageAttrChanged"},
             requireAll = false)
     public static void setProductImage(ImageView imageView,
-                                       Bitmap bitmap) {
+                                       Bitmap bitmap,
+                                       InverseBindingListener inverseBindingListener) {
         imageView.setImageBitmap(bitmap);
+        inverseBindingListener.onChange();
     }
 
     @InverseBindingAdapter(attribute = "bind:productImage",
