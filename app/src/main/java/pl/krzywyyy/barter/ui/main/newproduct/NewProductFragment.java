@@ -38,9 +38,13 @@ public class NewProductFragment extends DialogFragment {
         checkIfReadExternalPermissionIsGranted();
         fragmentNewProductBinding.setNewProductViewModel(mViewModel);
 
-        fragmentNewProductBinding.getRoot().findViewById(R.id.new_product_image_button).setOnClickListener(e -> loadImageFromGallery());
-        fragmentNewProductBinding.getRoot().findViewById(R.id.exit_new_product_dialog).setOnClickListener(e -> this.dismiss());
-        fragmentNewProductBinding.getRoot().findViewById(R.id.add_new_product_button).setOnClickListener(e -> mViewModel.tost(getContext()));
+        fragmentNewProductBinding.getRoot().findViewById(R.id.new_product_image_button)
+                .setOnClickListener(e -> loadImageFromGallery());
+        fragmentNewProductBinding.getRoot().findViewById(R.id.exit_new_product_dialog)
+                .setOnClickListener(e -> this.dismiss());
+        fragmentNewProductBinding.getRoot().findViewById(R.id.add_new_product_button)
+                .setOnClickListener(e -> mViewModel.addNewProduct(getContext()));
+
         return fragmentNewProductBinding.getRoot();
     }
 
@@ -55,7 +59,7 @@ public class NewProductFragment extends DialogFragment {
                         ImageView productImage = Objects.requireNonNull(getView()).findViewById(R.id.new_product_image);
                         productImage.setImageBitmap(bitmap);
                     } catch (IOException e) {
-                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.cannot_read_image, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
