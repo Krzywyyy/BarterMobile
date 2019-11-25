@@ -9,7 +9,7 @@ import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.api.ProductInterface;
 import pl.krzywyyy.barter.model.domain.Product;
 import pl.krzywyyy.barter.model.domain.ProductDetail;
-import pl.krzywyyy.barter.utils.ImageEncoder;
+import pl.krzywyyy.barter.utils.ImageDecoder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,7 +48,7 @@ public class ProductDetailsViewModel extends ViewModel {
                     productDetail.setTitle(response.body().getTitle());
                     productDetail.setDescription(response.body().getDescription());
                     productDetail.setSpecialization(response.body().getSpecialization());
-                    productDetail.setImage(ImageEncoder.toImage(response.body().getImage()));
+                    productDetail.setImage(ImageDecoder.toImage(response.body().getImage()));
                     product.setValue(productDetail);
                 }
             }
