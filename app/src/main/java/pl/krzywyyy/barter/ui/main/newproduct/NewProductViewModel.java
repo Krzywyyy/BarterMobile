@@ -1,6 +1,8 @@
 package pl.krzywyyy.barter.ui.main.newproduct;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
@@ -28,14 +30,15 @@ public class NewProductViewModel extends BaseObservable {
     private Product product;
     private SpinnerAdapter productCategoryAdapter;
     private SpinnerAdapter specializationAdapter;
+    private Bitmap productImage;
 
     public NewProductViewModel(Context context) {
         MyApplication.appComponent.inject(this);
         product = new Product();
         productCategoryAdapter = new ArrayAdapter<>(context, R.layout.spinner_list_item, R.id.spinner_item, ProductCategory.values());
         specializationAdapter = new ArrayAdapter<>(context, R.layout.spinner_list_item, R.id.spinner_item, Specialization.values());
+        productImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.no_image);
     }
-
 
     public void tost(Context context) {
         Toast.makeText(context, product.toString(), Toast.LENGTH_SHORT).show();
