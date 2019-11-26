@@ -17,9 +17,11 @@ public class OfferFragment extends DialogFragment {
 
     private OfferViewModel mViewModel;
     private int productId;
+    private String title;
 
-    public OfferFragment(int productId) {
+    public OfferFragment(int productId, String title) {
         this.productId = productId;
+        this.title = title;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class OfferFragment extends DialogFragment {
         view.findViewById(R.id.cancel_offer_button)
                 .setOnClickListener(e -> this.dismiss());
         view.findViewById(R.id.confirm_offer_button)
-                .setOnClickListener(e -> mViewModel.makeOffer(getContext(), productId));
+                .setOnClickListener(e -> mViewModel.makeOffer(getContext(), productId, title));
 
         mViewModel.getOfferDone().observe(this, offerDone -> {
             if (offerDone) {

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,7 +57,7 @@ public class ProductDetailsFragment extends DialogFragment {
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         String offerDialogFragmentName = "offerDialog";
         fragmentTransaction.addToBackStack(offerDialogFragmentName);
-        DialogFragment offerFragment = new OfferFragment(productId);
+        DialogFragment offerFragment = new OfferFragment(productId, productTitle.getText().toString());
         offerFragment.show(fragmentTransaction, offerDialogFragmentName);
     }
 }
