@@ -39,4 +39,12 @@
     <string name="specialization">Dziedzina</string>
     <string name="cannot_read_image">Nie można wczytać pliku</string>
     <string name="successfully_added_new_product">Pomyślnie dodano produkt</string>
+    <string name="message">Wiadomość</string>
+    <string name="give_offer">Podaj ofertę</string>
+    <string name="confirm">Zatwierdź</string>
+    <string name="cancel">Anuluj</string>
+    <string name="successfully_added_offer">Pomyślnie złożono ofertę</string>
+    <string name="unsuccessfully_added_offer">Nie udało się złożyć oferty</string>
+    <string name="unsuccessfully_added_new_product">Pomyślnie złożono ofertę</string>
+    <string name="wait_till_details_load">Proszę poczekać, aż szczegóły produktu zostaną wczytane</string>
 </resources>

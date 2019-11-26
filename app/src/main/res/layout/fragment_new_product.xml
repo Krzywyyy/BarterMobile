@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_title"
+                    android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLines="1"
                     android:text="@={newProductViewModel.product.title}" />
@@ -133,8 +134,9 @@
                     android:layout_height="wrap_content"
                     android:gravity="top"
                     android:hint="@string/enter_description"
-                    android:inputType="text"
-                    android:lines="10"
+                    android:importantForAutofill="no"
+                    android:inputType="none"
+                    android:lines="7"
                     android:text="@={newProductViewModel.product.description}" />
 
                 <Button
