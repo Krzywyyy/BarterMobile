@@ -7,8 +7,9 @@ import lombok.Data;
 @Data
 public class Offer {
     private int id;
-    private int offeredProductId;
-    private int aimedProductId;
+    private String message;
+    private int productId;
+    private int offererId;
     private Date offerDate;
     private Date confirmDate;
 }
