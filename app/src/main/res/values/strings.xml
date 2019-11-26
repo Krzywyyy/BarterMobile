@@ -46,4 +46,5 @@
     <string name="successfully_added_offer">Pomyślnie złożono ofertę</string>
     <string name="unsuccessfully_added_offer">Nie udało się złożyć oferty</string>
     <string name="unsuccessfully_added_new_product">Pomyślnie złożono ofertę</string>
+    <string name="wait_till_details_load">Proszę poczekać, aż szczegóły produktu zostaną wczytane</string>
 </resources>
