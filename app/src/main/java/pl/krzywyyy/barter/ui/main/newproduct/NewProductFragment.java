@@ -34,18 +34,25 @@ public class NewProductFragment extends DialogFragment {
                              @Nullable Bundle savedInstanceState) {
         mViewModel = new NewProductViewModel(getContext());
 
-        FragmentNewProductBinding fragmentNewProductBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_product, container, false);
         checkIfReadExternalPermissionIsGranted();
+
+        FragmentNewProductBinding fragmentNewProductBinding = DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_new_product,
+                container,
+                false);
         fragmentNewProductBinding.setNewProductViewModel(mViewModel);
 
-        fragmentNewProductBinding.getRoot().findViewById(R.id.new_product_image_button)
+        View view = fragmentNewProductBinding.getRoot();
+
+        view.findViewById(R.id.new_product_image_button)
                 .setOnClickListener(e -> loadImageFromGallery());
-        fragmentNewProductBinding.getRoot().findViewById(R.id.exit_new_product_dialog)
+        view.findViewById(R.id.exit_new_product_dialog)
                 .setOnClickListener(e -> this.dismiss());
-        fragmentNewProductBinding.getRoot().findViewById(R.id.add_new_product_button)
+        view.findViewById(R.id.add_new_product_button)
                 .setOnClickListener(e -> mViewModel.addNewProduct(getContext()));
 
-        return fragmentNewProductBinding.getRoot();
+        return view;
     }
 
     @Override

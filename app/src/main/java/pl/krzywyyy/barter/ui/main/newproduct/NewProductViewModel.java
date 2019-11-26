@@ -38,7 +38,7 @@ public class NewProductViewModel extends BaseObservable {
     private SpinnerAdapter specializationAdapter;
     private Bitmap productImage;
 
-    public NewProductViewModel(Context context) {
+    NewProductViewModel(Context context) {
         MyApplication.appComponent.inject(this);
         product = new Product();
         productCategoryAdapter = new ArrayAdapter<>(context, R.layout.spinner_list_item, R.id.spinner_item, ProductCategory.values());
@@ -46,7 +46,7 @@ public class NewProductViewModel extends BaseObservable {
         productImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.no_image);
     }
 
-    public void addNewProduct(Context context) {
+    void addNewProduct(Context context) {
         product.setImage(ImageEncoder.toBase64(productImage));
 
         ProductInterface productService = retrofit.create(ProductInterface.class);
@@ -58,6 +58,8 @@ public class NewProductViewModel extends BaseObservable {
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(context, R.string.successfully_added_new_product, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, R.string.unsuccessfully_added_new_product, Toast.LENGTH_SHORT).show();
                 }
             }
 
