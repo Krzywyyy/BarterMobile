@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class Offer {
     private int id;
+    private String title;
     private String message;
     private int productId;
     private int offererId;
