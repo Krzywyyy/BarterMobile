@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,11 +27,12 @@ import pl.krzywyyy.barter.utils.BitmapLoader;
 public class NewProductFragment extends DialogFragment {
 
     private final int RESULT_GALLERY = 0;
+    private NewProductViewModel mViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        NewProductViewModel mViewModel = new NewProductViewModel(getContext());
+        mViewModel = new NewProductViewModel(getContext());
 
         FragmentNewProductBinding fragmentNewProductBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_product, container, false);
         checkIfReadExternalPermissionIsGranted();
@@ -56,8 +56,8 @@ public class NewProductFragment extends DialogFragment {
                 if (imageUri != null) {
                     try {
                         Bitmap bitmap = BitmapLoader.loadBitmapFromUri(getContext(), imageUri);
-                        ImageView productImage = Objects.requireNonNull(getView()).findViewById(R.id.new_product_image);
-                        productImage.setImageBitmap(bitmap);
+                        mViewModel.setProductImage(bitmap);
+                        mViewModel.notifyChange();
                     } catch (IOException e) {
                         Toast.makeText(getContext(), R.string.cannot_read_image, Toast.LENGTH_SHORT).show();
                     }
