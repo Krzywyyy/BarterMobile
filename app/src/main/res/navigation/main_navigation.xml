@@ -14,9 +14,9 @@
         android:name="pl.krzywyyy.barter.ui.main.userproducts.UserProductsFragment"
         tools:layout="@layout/fragment_user_products" />
 
-<!--    <fragment-->
-<!--        android:id="@+id/nav_product_details"-->
-<!--        android:name="pl.krzywyyy.barter.ui.main.productdetails.ProductDetailsFragment"-->
-<!--        tools:layout="@layout/fragment_product_details" />-->
+    <fragment
+        android:id="@+id/nav_user_offers"
+        android:name="pl.krzywyyy.barter.ui.main.useroffers.UserOffersFragment"
+        tools:layout="@layout/fragment_user_offers" />
 
 </navigation>

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +17,7 @@ import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.model.domain.ProductView;
 import pl.krzywyyy.barter.ui.main.productdetails.ProductDetailsFragment;
 
-public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapter.ViewHolder> {
+public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsViewHolder> {
 
     private final Context context;
     private final String dialogFragmentName = "detailDialog";
@@ -32,13 +30,14 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_product_card_view, parent, false);
-        return new ViewHolder(view);
+    public UserProductsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.user_product_card_view, parent, false);
+        return new UserProductsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UserProductsViewHolder holder, int position) {
         if (productViewList != null) {
             holder.productTitle.setText(productViewList.get(position).getTitle());
             holder.productImage.setImageBitmap(productViewList.get(position).getImage());
@@ -55,17 +54,5 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
     @Override
     public int getItemCount() {
         return productViewList != null ? productViewList.size() : 0;
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView productTitle;
-        ImageView productImage;
-
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            productTitle = itemView.findViewById(R.id.product_title_card_view);
-            productImage = itemView.findViewById(R.id.product_image_card_view);
-        }
     }
 }

@@ -36,10 +36,17 @@ public class OfferViewModel extends BaseObservable {
         offer = new Offer();
     }
 
-    void makeOffer(Context context, int productId) {
+    void makeOffer(Context context, int productId, String title) {
         OfferInterface offerService = retrofit.create(OfferInterface.class);
 
+        if(title.equals(""))
+        {
+            Toast.makeText(context, R.string.wait_till_details_load, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         offer.setProductId(productId);
+        offer.setTitle(title);
 
         Call<Offer> call = offerService.save(offer);
 
