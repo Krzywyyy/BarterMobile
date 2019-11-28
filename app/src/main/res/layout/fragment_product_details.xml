@@ -64,7 +64,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="20dp"
-                android:text="@string/make_an_offer" />
+                android:text="@string/make_an_offer"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/delete_product_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="20dp"
+                android:text="@string/delete"
+                android:visibility="gone" />
+
         </LinearLayout>
 
     </ScrollView>

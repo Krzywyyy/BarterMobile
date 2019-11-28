@@ -1,6 +1,7 @@
 package pl.krzywyyy.barter.ui.main.userproducts;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import pl.krzywyyy.barter.ui.main.productdetails.ProductDetailsFragment;
 public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsViewHolder> {
 
     private final Context context;
-    private final String dialogFragmentName = "detailDialog";
     private List<ProductView> productViewList;
 
     public UserProductsAdapter(List<ProductView> productViews, Context context) {
@@ -42,13 +42,22 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsViewHo
             holder.productTitle.setText(productViewList.get(position).getTitle());
             holder.productImage.setImageBitmap(productViewList.get(position).getImage());
             holder.itemView.setOnClickListener(e -> {
-                FragmentTransaction fragmentTransaction = ((AppCompatActivity) context)
-                        .getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.addToBackStack(dialogFragmentName);
-                DialogFragment productDetailsDialogFragment = new ProductDetailsFragment(productViewList.get(position).getId());
-                productDetailsDialogFragment.show(fragmentTransaction, dialogFragmentName);
+                showProductDetailDialog(position);
             });
         }
+    }
+
+    private void showProductDetailDialog(int position) {
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity) context)
+                .getSupportFragmentManager().beginTransaction();
+        String dialogFragmentName = "detailDialog";
+        fragmentTransaction.addToBackStack(dialogFragmentName);
+        DialogFragment productDetailsDialogFragment = new ProductDetailsFragment(productViewList.get(position).getId());
+
+        Bundle args = new Bundle();
+        args.putString("parent", UserProductsFragment.class.getName());
+        productDetailsDialogFragment.setArguments(args);
+        productDetailsDialogFragment.show(fragmentTransaction, dialogFragmentName);
     }
 
     @Override

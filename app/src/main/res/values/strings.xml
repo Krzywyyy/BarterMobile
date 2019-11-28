@@ -47,4 +47,13 @@
     <string name="unsuccessfully_added_offer">Nie udało się złożyć oferty</string>
     <string name="unsuccessfully_added_new_product">Pomyślnie złożono ofertę</string>
     <string name="wait_till_details_load">Proszę poczekać, aż szczegóły produktu zostaną wczytane</string>
+    <string name="yes">tak</string>
+    <string name="no">nie</string>
+    <string name="discard_changes_title">Odrzucić zmiany?</string>
+    <string name="discard_changes_message">Czy na pewno chcesz odrzucić wprowadzone zmiany?</string>
+    <string name="delete_title">Usunąć?</string>
+    <string name="delete_message">Czy na pewno chcesz to usunąć?</string>
+    <string name="delete">Usuń</string>
+    <string name="successfully_deleted_product">Pomyślnie usunięto produkt</string>
+    <string name="unsuccessfully_deleted_product">Nie udało się usunąć produktu</string>
 </resources>

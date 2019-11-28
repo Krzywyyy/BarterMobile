@@ -39,7 +39,7 @@ public class OfferFragment extends DialogFragment {
         View view = fragmentOfferBinding.getRoot();
 
         view.findViewById(R.id.cancel_offer_button)
-                .setOnClickListener(e -> this.dismiss());
+                .setOnClickListener(e -> mViewModel.cancel(getContext(), this));
         view.findViewById(R.id.confirm_offer_button)
                 .setOnClickListener(e -> mViewModel.makeOffer(getContext(), productId, title));
 

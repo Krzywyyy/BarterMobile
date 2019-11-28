@@ -31,7 +31,7 @@ public class UserProductsViewModel extends ViewModel {
         productViews = getUserProducts();
     }
 
-    public MutableLiveData<List<ProductView>> getProductViews() {
+    MutableLiveData<List<ProductView>> getProductViews() {
         return productViews;
     }
 

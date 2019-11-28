@@ -14,6 +14,7 @@ import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
 import pl.krzywyyy.barter.api.OfferInterface;
 import pl.krzywyyy.barter.model.domain.Offer;
+import pl.krzywyyy.barter.utils.dialogs.DiscardChangesDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,13 +35,13 @@ public class OfferViewModel extends BaseObservable {
         MyApplication.appComponent.inject(this);
         offerDone = new MutableLiveData<>();
         offer = new Offer();
+        offer.setMessage("");
     }
 
     void makeOffer(Context context, int productId, String title) {
         OfferInterface offerService = retrofit.create(OfferInterface.class);
 
-        if(title.equals(""))
-        {
+        if (title.equals("")) {
             Toast.makeText(context, R.string.wait_till_details_load, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -68,5 +69,17 @@ public class OfferViewModel extends BaseObservable {
                 Toast.makeText(context, R.string.failed_retrofit_request_toast, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    void cancel(Context context, OfferFragment offerFragment) {
+        if (messageIsNotEmpty()) {
+            DiscardChangesDialog.show(context, offerFragment);
+        } else {
+            offerFragment.dismiss();
+        }
+    }
+
+    private boolean messageIsNotEmpty() {
+        return offer.getMessage().length() > 0;
     }
 }

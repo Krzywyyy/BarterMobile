@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +15,9 @@ import pl.krzywyyy.barter.model.domain.Offer;
 
 public class UserOffersAdapter extends RecyclerView.Adapter<UserOffersViewHolder> {
 
-    private final Context context;
     private List<Offer> userOffers;
 
-    public UserOffersAdapter(Context context, List<Offer> userOffers) {
-        this.context = context;
+    public UserOffersAdapter(List<Offer> userOffers) {
         this.userOffers = userOffers;
     }
 
@@ -34,10 +31,9 @@ public class UserOffersAdapter extends RecyclerView.Adapter<UserOffersViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull UserOffersViewHolder holder, int position) {
-        if(userOffers != null){
+        if (userOffers != null) {
             holder.offerTitle.setText(userOffers.get(position).getTitle());
             holder.offerMessage.setText(userOffers.get(position).getMessage());
-            holder.itemView.setOnClickListener( e -> Toast.makeText(context, "wcislem: " + userOffers.get(position).getTitle(), Toast.LENGTH_SHORT).show());
         }
     }
 

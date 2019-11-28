@@ -48,7 +48,7 @@ public class NewProductFragment extends DialogFragment {
         view.findViewById(R.id.new_product_image_button)
                 .setOnClickListener(e -> loadImageFromGallery());
         view.findViewById(R.id.exit_new_product_dialog)
-                .setOnClickListener(e -> this.dismiss());
+                .setOnClickListener(e -> mViewModel.cancel(getContext(), this));
         view.findViewById(R.id.add_new_product_button)
                 .setOnClickListener(e -> mViewModel.addNewProduct(getContext()));
 
