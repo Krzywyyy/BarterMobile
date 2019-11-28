@@ -19,6 +19,7 @@ import pl.krzywyyy.barter.api.ProductInterface;
 import pl.krzywyyy.barter.model.domain.Product;
 import pl.krzywyyy.barter.model.enums.ProductCategory;
 import pl.krzywyyy.barter.model.enums.Specialization;
+import pl.krzywyyy.barter.utils.dialogs.DiscardChangesDialog;
 import pl.krzywyyy.barter.utils.ImageEncoder;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +42,8 @@ public class NewProductViewModel extends BaseObservable {
     NewProductViewModel(Context context) {
         MyApplication.appComponent.inject(this);
         product = new Product();
+        product.setTitle("");
+        product.setDescription("");
         productCategoryAdapter = new ArrayAdapter<>(context, R.layout.spinner_list_item, R.id.spinner_item, ProductCategory.values());
         specializationAdapter = new ArrayAdapter<>(context, R.layout.spinner_list_item, R.id.spinner_item, Specialization.values());
         productImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.no_image);
@@ -69,5 +72,17 @@ public class NewProductViewModel extends BaseObservable {
                 Toast.makeText(context, R.string.failed_retrofit_request_toast, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    void cancel(Context context, NewProductFragment newProductFragment) {
+        if (fieldsAreNotEmpty()) {
+            DiscardChangesDialog.show(context, newProductFragment);
+        } else {
+            newProductFragment.dismiss();
+        }
+    }
+
+    private boolean fieldsAreNotEmpty() {
+        return product.getTitle().length() > 0 || product.getDescription().length() > 0;
     }
 }

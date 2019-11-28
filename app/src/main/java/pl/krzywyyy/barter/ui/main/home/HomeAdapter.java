@@ -1,6 +1,7 @@
 package pl.krzywyyy.barter.ui.main.home;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import pl.krzywyyy.barter.ui.main.productdetails.ProductDetailsFragment;
 public class HomeAdapter extends RecyclerView.Adapter<HomeViewHolder> {
 
     private final Context context;
-    private final String dialogFragmentName = "detailDialog";
     private List<ProductView> productViewList;
 
     HomeAdapter(List<ProductView> productViews, Context context) {
@@ -40,9 +40,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeViewHolder> {
         if (productViewList != null) {
             holder.productTitle.setText(productViewList.get(position).getTitle());
             holder.productImage.setImageBitmap(productViewList.get(position).getImage());
-            holder.itemView.setOnClickListener(e -> {
-                showProductDetailDialog(position);
-            });
+            holder.itemView.setOnClickListener(e -> showProductDetailDialog(position));
         }
     }
 
@@ -59,8 +57,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeViewHolder> {
     private void showProductDetailDialog(int position) {
         FragmentTransaction fragmentTransaction = ((AppCompatActivity) context)
                 .getSupportFragmentManager().beginTransaction();
+        String dialogFragmentName = "detailDialog";
         fragmentTransaction.addToBackStack(dialogFragmentName);
         DialogFragment productDetailsDialogFragment = new ProductDetailsFragment(productViewList.get(position).getId());
+
+        Bundle args = new Bundle();
+        args.putString("parent", HomeFragment.class.getName());
+        productDetailsDialogFragment.setArguments(args);
+
         productDetailsDialogFragment.show(fragmentTransaction, dialogFragmentName);
     }
 }
