@@ -30,13 +30,13 @@ public class UserOffersFragment extends Fragment {
         UserOffersViewModel mViewModel = ViewModelProviders.of(this).get(UserOffersViewModel.class);
         mRecyclerView = view.findViewById(R.id.users_offers_recycler_view);
 
-        offersAdapter = new UserOffersAdapter(getContext(), userOffers);
+        offersAdapter = new UserOffersAdapter(userOffers);
         mRecyclerView.setAdapter(offersAdapter);
 
         mViewModel.getUserOffers().observe(this, offers -> {
             userOffers = offers;
 
-            offersAdapter = new UserOffersAdapter(getContext(), userOffers);
+            offersAdapter = new UserOffersAdapter(userOffers);
             mRecyclerView.setAdapter(offersAdapter);
         });
 
