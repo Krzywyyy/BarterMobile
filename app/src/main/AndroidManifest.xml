@@ -18,6 +18,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/MainAppTheme" />
         <activity android:name=".ui.authentication.AuthenticationActivity">
             <intent-filter>
