@@ -10,6 +10,9 @@ public class Product {
     private String title;
     private String description;
     private String image;
+    private String address;
+    private float latitude;
+    private float longitude;
     private ProductCategory category;
     private Specialization specialization;
     private int userId;

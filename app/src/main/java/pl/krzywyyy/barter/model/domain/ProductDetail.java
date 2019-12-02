@@ -9,6 +9,7 @@ import pl.krzywyyy.barter.model.enums.Specialization;
 public class ProductDetail {
     private String title;
     private String description;
+    private String address;
     private Specialization specialization;
     private Bitmap image;
 }
