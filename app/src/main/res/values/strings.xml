@@ -56,4 +56,7 @@
     <string name="delete">Usuń</string>
     <string name="successfully_deleted_product">Pomyślnie usunięto produkt</string>
     <string name="unsuccessfully_deleted_product">Nie udało się usunąć produktu</string>
+    <string name="address">Adres</string>
+    <string name="address_hint">Wprowadź swój adres</string>
+    <string name="cannot_get_address">Nie udało się odnaleźć adresu</string>
 </resources>
