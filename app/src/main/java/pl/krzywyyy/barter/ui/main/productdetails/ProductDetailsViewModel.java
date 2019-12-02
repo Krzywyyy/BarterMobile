@@ -84,6 +84,7 @@ public class ProductDetailsViewModel extends ViewModel {
                     productDetail.setTitle(response.body().getTitle());
                     productDetail.setDescription(response.body().getDescription());
                     productDetail.setSpecialization(response.body().getSpecialization());
+                    productDetail.setAddress(response.body().getAddress());
                     productDetail.setImage(ImageDecoder.toImage(response.body().getImage()));
                     product.setValue(productDetail);
                 }

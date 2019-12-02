@@ -25,6 +25,7 @@ public class ProductDetailsFragment extends DialogFragment {
     private TextView productTitle;
     private TextView productDescription;
     private TextView productSpecialization;
+    private TextView productAddress;
     private int productId;
 
     public ProductDetailsFragment(int productId) {
@@ -52,12 +53,14 @@ public class ProductDetailsFragment extends DialogFragment {
         productTitle = view.findViewById(R.id.product_detail_title);
         productDescription = view.findViewById(R.id.product_detail_description);
         productSpecialization = view.findViewById(R.id.product_detail_specialization);
+        productAddress = view.findViewById(R.id.product_detail_address);
 
         mViewModel.getProductDetail().observe(this, productDetail -> {
             productImage.setImageBitmap(productDetail.getImage());
             productTitle.setText(productDetail.getTitle());
             productDescription.setText(productDetail.getDescription());
             productSpecialization.setText(String.valueOf(productDetail.getSpecialization()));
+            productAddress.setText(productDetail.getAddress());
         });
         return view;
     }
