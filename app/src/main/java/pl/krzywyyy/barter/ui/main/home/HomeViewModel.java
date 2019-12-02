@@ -9,7 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
-import pl.krzywyyy.barter.api.ProductInterface;
+import pl.krzywyyy.barter.api.barter.ProductInterface;
 import pl.krzywyyy.barter.model.domain.Product;
 import pl.krzywyyy.barter.model.domain.ProductView;
 import pl.krzywyyy.barter.utils.ImageDecoder;

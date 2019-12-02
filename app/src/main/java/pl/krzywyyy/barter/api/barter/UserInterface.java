@@ -1,4 +1,4 @@
-package pl.krzywyyy.barter.api;
+package pl.krzywyyy.barter.api.barter;
 
 import pl.krzywyyy.barter.model.domain.User;
 import retrofit2.Call;

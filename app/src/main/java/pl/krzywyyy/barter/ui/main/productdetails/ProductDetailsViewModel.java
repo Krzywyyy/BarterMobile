@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
-import pl.krzywyyy.barter.api.ProductInterface;
+import pl.krzywyyy.barter.api.barter.ProductInterface;
 import pl.krzywyyy.barter.model.domain.Product;
 import pl.krzywyyy.barter.model.domain.ProductDetail;
 import pl.krzywyyy.barter.utils.ImageDecoder;

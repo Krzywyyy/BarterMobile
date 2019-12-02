@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
-import pl.krzywyyy.barter.api.OfferInterface;
+import pl.krzywyyy.barter.api.barter.OfferInterface;
 import pl.krzywyyy.barter.model.domain.Offer;
 import pl.krzywyyy.barter.utils.dialogs.DiscardChangesDialog;
 import retrofit2.Call;
