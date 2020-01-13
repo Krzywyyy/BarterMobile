@@ -50,7 +50,8 @@ public class NewProductFragment extends DialogFragment {
         view.findViewById(R.id.exit_new_product_dialog)
                 .setOnClickListener(e -> mViewModel.cancel(getContext(), this));
         view.findViewById(R.id.add_new_product_button)
-                .setOnClickListener(e -> mViewModel.addNewProduct(getContext()));
+                //.setOnClickListener(e -> mViewModel.addNewProduct(getContext()));
+                .setOnClickListener(e -> mViewModel.tryToGetCoordinatesAndAddNewProduct(getContext()));
 
         return view;
     }

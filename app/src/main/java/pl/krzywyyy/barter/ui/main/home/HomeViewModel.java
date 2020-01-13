@@ -9,7 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
-import pl.krzywyyy.barter.api.ProductInterface;
+import pl.krzywyyy.barter.api.barter.ProductInterface;
 import pl.krzywyyy.barter.model.domain.Product;
 import pl.krzywyyy.barter.model.domain.ProductView;
 import pl.krzywyyy.barter.utils.ImageDecoder;
@@ -27,8 +27,22 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<List<ProductView>> productViews;
     private MutableLiveData<List<ProductView>> newProducts;
 
-    public HomeViewModel() {
+    private String searchPhrase;
+    private String category;
+    private String specialization;
+    private Integer distance;
+    private Float latitude;
+    private Float longitude;
+
+    public HomeViewModel(String searchPhrase, String category, String specialization, Integer distance, Float latitude, Float longitude) {
         MyApplication.appComponent.inject(this);
+        this.searchPhrase = searchPhrase;
+        this.category = category;
+        this.specialization = specialization;
+        this.distance = distance;
+        this.latitude = latitude;
+        this.longitude = longitude;
+
         productViews = getProducts(1);
         newProducts = new MutableLiveData<>();
     }
@@ -48,7 +62,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<List<ProductView>> getProducts(int page) {
         ProductInterface productService = retrofit.create(ProductInterface.class);
 
-        Call<List<Product>> call = productService.findAll(page);
+        Call<List<Product>> call = productService.findAll(page, category, specialization, searchPhrase, distance, latitude, longitude);
 
         MutableLiveData<List<ProductView>> products = new MutableLiveData<>();
 

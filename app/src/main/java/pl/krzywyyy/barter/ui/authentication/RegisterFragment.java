@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
-import pl.krzywyyy.barter.api.UserInterface;
+import pl.krzywyyy.barter.api.barter.UserInterface;
 import pl.krzywyyy.barter.model.domain.User;
 import retrofit2.Call;
 import retrofit2.Callback;

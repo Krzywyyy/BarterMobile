@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import pl.krzywyyy.barter.model.dictionaries.SpecializationDictionary;
 
 public enum Specialization {
+    ALL(SpecializationDictionary.ALL),
     IT(SpecializationDictionary.IT),
     MECHANICS(SpecializationDictionary.MECHANICS),
     MECHATRONICS(SpecializationDictionary.MECHATRONICS),
