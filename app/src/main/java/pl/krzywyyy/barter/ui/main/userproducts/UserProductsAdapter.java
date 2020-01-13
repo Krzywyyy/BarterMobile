@@ -54,9 +54,6 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsViewHo
         fragmentTransaction.addToBackStack(dialogFragmentName);
         DialogFragment productDetailsDialogFragment = new ProductDetailsFragment(productViewList.get(position).getId());
 
-        Bundle args = new Bundle();
-        args.putString("parent", UserProductsFragment.class.getName());
-        productDetailsDialogFragment.setArguments(args);
         productDetailsDialogFragment.show(fragmentTransaction, dialogFragmentName);
     }
 

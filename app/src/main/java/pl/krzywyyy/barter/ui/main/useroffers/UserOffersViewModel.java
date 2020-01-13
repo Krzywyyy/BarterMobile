@@ -8,7 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
-import pl.krzywyyy.barter.api.OfferInterface;
+import pl.krzywyyy.barter.api.barter.OfferInterface;
 import pl.krzywyyy.barter.model.domain.Offer;
 import retrofit2.Call;
 import retrofit2.Callback;

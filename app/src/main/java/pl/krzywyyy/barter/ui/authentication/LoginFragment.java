@@ -20,7 +20,7 @@ import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
-import pl.krzywyyy.barter.api.UserInterface;
+import pl.krzywyyy.barter.api.barter.UserInterface;
 import pl.krzywyyy.barter.model.domain.User;
 import pl.krzywyyy.barter.ui.main.MainActivity;
 import pl.krzywyyy.barter.utils.ActivityChanger;

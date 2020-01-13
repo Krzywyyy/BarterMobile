@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
+    android:layout_marginBottom="20dp"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="10dp">
 
@@ -14,7 +15,7 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/offer_message_card_view"
+            android:id="@+id/product_offer_message_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -22,22 +23,38 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/offer_title_card_view"
+            android:id="@+id/product_offer_title_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="35dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/delete"
-            android:background="@android:color/holo_red_light"/>
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:text="@string/accept"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:background="@android:color/holo_green_light"/>
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/reject"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:background="@android:color/holo_red_dark"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -7,4 +7,5 @@ public class SpecializationDictionary {
     public static final String CHEMISTRY = "Chemia";
     public static final String BIOLOGY = "Biologia";
     public static final String OTHER = "Inne";
+    public static final String ALL = "Wszystkie";
 }

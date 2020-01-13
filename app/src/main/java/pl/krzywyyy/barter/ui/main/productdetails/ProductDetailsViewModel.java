@@ -7,11 +7,15 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import pl.krzywyyy.barter.MyApplication;
 import pl.krzywyyy.barter.R;
-import pl.krzywyyy.barter.api.ProductInterface;
+import pl.krzywyyy.barter.api.barter.OfferInterface;
+import pl.krzywyyy.barter.api.barter.ProductInterface;
+import pl.krzywyyy.barter.model.domain.Offer;
 import pl.krzywyyy.barter.model.domain.Product;
 import pl.krzywyyy.barter.model.domain.ProductDetail;
 import pl.krzywyyy.barter.utils.ImageDecoder;
@@ -28,18 +32,49 @@ public class ProductDetailsViewModel extends ViewModel {
     Retrofit retrofit;
 
     private MutableLiveData<ProductDetail> productDetail;
+    private MutableLiveData<List<Offer>> productOffers;
 
     public ProductDetailsViewModel(int productId) {
         MyApplication.appComponent.inject(this);
         productDetail = getProduct(productId);
+        productOffers = getOffers(productId);
     }
 
-    public MutableLiveData<ProductDetail> getProductDetail() {
+    MutableLiveData<List<Offer>> getProductOffers() {
+        return productOffers;
+    }
+
+    MutableLiveData<ProductDetail> getProductDetail() {
         return productDetail;
     }
 
     void removeProduct(Context context, int productId) {
         DeleteDialog.show(context, getDeleteConfirmListener(context, productId));
+    }
+
+    private MutableLiveData<List<Offer>> getOffers(int productId) {
+        OfferInterface offerService = retrofit.create(OfferInterface.class);
+
+        Call<List<Offer>> call = offerService.findAllByProduct(productId);
+        MutableLiveData<List<Offer>> productOffers = new MutableLiveData<>();
+
+        call.enqueue(new Callback<List<Offer>>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<List<Offer>> call, Response<List<Offer>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    productOffers.setValue(response.body());
+                }
+            }
+
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<List<Offer>> call, Throwable t) {
+
+            }
+        });
+        return productOffers;
+
     }
 
     private DialogInterface.OnClickListener getDeleteConfirmListener(Context context, int productId) {
@@ -84,6 +119,7 @@ public class ProductDetailsViewModel extends ViewModel {
                     productDetail.setTitle(response.body().getTitle());
                     productDetail.setDescription(response.body().getDescription());
                     productDetail.setSpecialization(response.body().getSpecialization());
+                    productDetail.setAddress(response.body().getAddress());
                     productDetail.setImage(ImageDecoder.toImage(response.body().getImage()));
                     product.setValue(productDetail);
                 }

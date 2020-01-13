@@ -5,4 +5,5 @@ public class ProductCategoryDictionary {
     public static final String NOTES = "Notatki";
     public static final String COACHING = "Korepetycje";
     public static final String OTHER = "Inne";
+    public static final String ALL = "Wszystkie";
 }

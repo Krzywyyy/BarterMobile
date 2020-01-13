@@ -36,7 +36,7 @@
     <string name="add">Dodaj</string>
     <string name="load_image">Dodaj\nzdjęcie</string>
     <string name="category">Kategoria</string>
-    <string name="specialization">Dziedzina</string>
+    <string name="specialization">Specjalizacja</string>
     <string name="cannot_read_image">Nie można wczytać pliku</string>
     <string name="successfully_added_new_product">Pomyślnie dodano produkt</string>
     <string name="message">Wiadomość</string>
@@ -56,4 +56,15 @@
     <string name="delete">Usuń</string>
     <string name="successfully_deleted_product">Pomyślnie usunięto produkt</string>
     <string name="unsuccessfully_deleted_product">Nie udało się usunąć produktu</string>
+    <string name="address">Adres</string>
+    <string name="address_hint">Wprowadź swój adres</string>
+    <string name="cannot_get_address">Nie udało się odnaleźć adresu</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_search_phrase">Wprowadź szukaną frazę</string>
+    <string name="distance">Odległość</string>
+    <string name="enter_max_distance">Maksymalna odległość</string>
+    <string name="search">Wyszukaj</string>
+    <string name="choose_filters">Wybierz filtry</string>
+    <string name="accept">Przyjmij</string>
+    <string name="reject">Odrzuć</string>
 </resources>
