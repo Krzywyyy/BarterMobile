@@ -16,8 +16,11 @@ public interface OfferInterface {
     @POST("offers")
     Call<Offer> save(@Body Offer offer);
 
-    @GET("offers")
+    @GET("offers/my")
     Call<List<Offer>> findAll();
+
+    @GET("offers")
+    Call<List<Offer>> findAllByProduct(@Query("productId") int productId);
 
     @GET("offers/{offerId}")
     Call<Offer> find(@Path("offerId") int offerId);

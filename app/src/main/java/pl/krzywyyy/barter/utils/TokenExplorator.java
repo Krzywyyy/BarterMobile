@@ -25,6 +25,11 @@ public class TokenExplorator {
         return getJWT(context).isExpired(10);
     }
 
+    public static int getUserId(Context context) {
+        JWT jwt = getJWT(context);
+        return Integer.parseInt(jwt.getClaim("userId").asString());
+    }
+
     private static JWT getJWT(Context context) {
         String token = SharedPreferencesManager.getToken(context);
         return new JWT(token.split(" ")[1]);

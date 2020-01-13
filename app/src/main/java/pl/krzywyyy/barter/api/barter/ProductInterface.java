@@ -17,7 +17,15 @@ public interface ProductInterface {
     Call<Product> save(@Body Product product);
 
     @GET("products")
-    Call<List<Product>> findAll(@Query("page") int page);
+    Call<List<Product>> findAll(
+            @Query("page") int page,
+            @Query("category") String category,
+            @Query("specialization") String specialization,
+            @Query("searchText") String searchText,
+            @Query("distance") Integer distance,
+            @Query("latitude") Float latitude,
+            @Query("longitude") Float longitude
+            );
 
     @GET("products/my")
     Call<List<Product>> findAllUserProducts();

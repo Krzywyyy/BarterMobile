@@ -1,6 +1,9 @@
 package pl.krzywyyy.barter.ui.main.useroffers;
 
-import android.content.Context;
+import android.graphics.Typeface;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +35,23 @@ public class UserOffersAdapter extends RecyclerView.Adapter<UserOffersViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserOffersViewHolder holder, int position) {
         if (userOffers != null) {
-            holder.offerTitle.setText(userOffers.get(position).getTitle());
-            holder.offerMessage.setText(userOffers.get(position).getMessage());
+            String message = "Złożona oferta: " + userOffers.get(position).getMessage();
+            String product = "Produkt: " + userOffers.get(position).getTitle();
+
+            final SpannableStringBuilder messageSB = new SpannableStringBuilder(message);
+            final SpannableStringBuilder productSB = new SpannableStringBuilder(product);
+
+            final StyleSpan bold = new StyleSpan(Typeface.BOLD);
+            final StyleSpan italic = new StyleSpan(Typeface.NORMAL);
+
+            messageSB.setSpan(bold, 0, 15, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            messageSB.setSpan(italic, 15, messageSB.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+            productSB.setSpan(bold, 0, 8, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            productSB.setSpan(italic, 8, productSB.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+            holder.offerTitle.setText(productSB);
+            holder.offerMessage.setText(messageSB);
         }
     }
 

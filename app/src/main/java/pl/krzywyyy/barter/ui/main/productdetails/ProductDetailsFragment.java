@@ -12,12 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import pl.krzywyyy.barter.R;
+import pl.krzywyyy.barter.model.domain.Offer;
 import pl.krzywyyy.barter.ui.main.offer.OfferFragment;
-import pl.krzywyyy.barter.ui.main.userproducts.UserProductsFragment;
+import pl.krzywyyy.barter.ui.main.productdetails.productoffers.ProductOffersAdapter;
+import pl.krzywyyy.barter.utils.TokenExplorator;
 
 public class ProductDetailsFragment extends DialogFragment {
 
@@ -27,6 +32,10 @@ public class ProductDetailsFragment extends DialogFragment {
     private TextView productSpecialization;
     private TextView productAddress;
     private int productId;
+
+    private List<Offer> productOffers = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private ProductOffersAdapter offersAdapter;
 
     public ProductDetailsFragment(int productId) {
         this.productId = productId;
@@ -39,6 +48,9 @@ public class ProductDetailsFragment extends DialogFragment {
 
         view.findViewById(R.id.exit_detail_dialog).setOnClickListener(e -> this.dismiss());
 
+        mRecyclerView = view.findViewById(R.id.product_offers_recycler_view);
+        offersAdapter = new ProductOffersAdapter(productOffers);
+        mRecyclerView.setAdapter(offersAdapter);
         ProductDetailsViewModel mViewModel = new ProductDetailsViewModel(productId);
 
         Button makeAnOfferButton = view.findViewById(R.id.make_an_offer_button);
@@ -62,19 +74,22 @@ public class ProductDetailsFragment extends DialogFragment {
             productSpecialization.setText(String.valueOf(productDetail.getSpecialization()));
             productAddress.setText(productDetail.getAddress());
         });
+
+        mViewModel.getProductOffers().observe(this, offers -> {
+            productOffers = offers;
+
+            offersAdapter = new ProductOffersAdapter(offers);
+            mRecyclerView.setAdapter(offersAdapter);
+        });
+
         return view;
     }
 
     private void setButton(Button makeAnOfferButton, Button deleteProductButton) {
-        if (getArguments() != null) {
-            String parentFragment = getArguments().getString("parent");
-            if (parentFragment != null) {
-                if (parentFragment.equals(UserProductsFragment.class.getName())) {
-                    deleteProductButton.setVisibility(View.VISIBLE);
-                } else {
-                    makeAnOfferButton.setVisibility(View.VISIBLE);
-                }
-            }
+        if(productId == TokenExplorator.getUserId(getContext())){
+            deleteProductButton.setVisibility(View.VISIBLE);
+        } else {
+            makeAnOfferButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -85,4 +100,5 @@ public class ProductDetailsFragment extends DialogFragment {
         DialogFragment offerFragment = new OfferFragment(productId, productTitle.getText().toString());
         offerFragment.show(fragmentTransaction, offerDialogFragmentName);
     }
+
 }
